@@ -6,7 +6,7 @@
 
                 define KEYBOARD_PS2                                 ; обработка клавиатуры
                 define MAPPING_REGISTERS                            ; включить мапинг портов
-                define DEBUG_EVE
+                define DEBUG_EVE                                    ; включить отладочную информацию FT812
 
                 include "Include.inc"
 

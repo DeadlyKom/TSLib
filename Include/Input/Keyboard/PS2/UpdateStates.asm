@@ -63,6 +63,7 @@ StateUpdates:           LD HL, KeyStates
                         JR .ScanCode
 
 .OverflowedStackSCodes  CALL Release
+
                         ; set default values
                         JP SetDefault
 
