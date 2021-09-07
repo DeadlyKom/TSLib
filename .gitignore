@@ -5,3 +5,6 @@ Build/Tmp/*
 *.trdW
 *.sna
 *.spg
+
+Examples\1.Empty\Files\Core.bin
+Examples\1.Empty\Files\TSLib.bin
