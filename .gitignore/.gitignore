@@ -1,4 +1,4 @@
-.tmp/
+.Build/Tmp/
 *.labels
 *.list
 *.sld
