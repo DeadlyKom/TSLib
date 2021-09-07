@@ -1,0 +1,10 @@
+
+                ifndef _INPUT_MOUSE_VIRTUAL_KEYS_
+                define _INPUT_MOUSE_VIRTUAL_KEYS_
+
+MOUSE_BIT       EQU #80
+VK_LBUTTON      EQU Mouse.SVK_LBUTTON | MOUSE_BIT
+VK_RBUTTON      EQU Mouse.SVK_RBUTTON | MOUSE_BIT
+VK_MBUTTON      EQU Mouse.SVK_MBUTTON | MOUSE_BIT
+
+                endif ; ~_INPUT_KEMPSTON_VIRTUAL_KEYS_
