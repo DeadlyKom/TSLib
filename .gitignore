@@ -8,3 +8,6 @@ Build/Tmp/*
 
 Examples/1.Empty/Files/Core.bin
 Examples/1.Empty/Files/TSLib.bin
+
+Examples/2.HelloWorld/Files/Core.bin
+Examples/2.HelloWorld/Files/TSLib.bin

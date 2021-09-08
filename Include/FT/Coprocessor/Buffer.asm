@@ -18,11 +18,9 @@
 ; Corrupt :
 ;   
 ; -----------------------------------------
-Copy            LD DE, (BufferPtr)
+Copy:           LD DE, (BufferPtr)
                 LDIR
                 EX DE, HL
-                LD (HL), C
-                INC HL
 
                 ; 4-byte alignment (L % 4)
                 LD A, L
@@ -48,6 +46,7 @@ Copy            LD DE, (BufferPtr)
 ;   DE - low command
 ;   BC - high command
 ; Out :
+;   HL
 ; Corrupt :
 ; -----------------------------------------
 Command_BCDE:   LD HL, (BufferPtr)
@@ -69,14 +68,27 @@ Command_BCDE:   LD HL, (BufferPtr)
 ; -----------------------------------------
 ; append ColorRGB command to CMD buffer
 ; In :
-;   C - Red
-;   D - Green
-;   E - Blue
+;   C - red
+;   D - green
+;   E - blue
 ; Out :
 ; Corrupt :
+;   HL, B
 ; -----------------------------------------
 ColorRGB:       LD B, #00
                 SET 2, B
+
+                JR Command_BCDE
+; -----------------------------------------
+; append ColorA command to CMD buffer
+; In :
+;   E - alpha
+; Out :
+; Corrupt :
+;   HL, B
+; -----------------------------------------
+ColorA:         LD BC, #1000
+                LD D, #00
 
                 JR Command_BCDE
 ; -----------------------------------------
@@ -100,10 +112,10 @@ Vertex2f:       RL D
 ; -----------------------------------------
 ; append Vertex2ii command to CMD buffer
 ; In :
-;   H  - Handle
-;   L  - Cell
-;   DE - Y
-;   BC - X
+;   H  - handle [0..31]
+;   L  - cell   [0..127]
+;   DE - Y      [0..512]
+;   BC - X      [0..512]
 ; Out :
 ; Corrupt :
 ; -----------------------------------------
@@ -139,6 +151,20 @@ Vertex2ii:      LD A, C
 
                 SET 7, B
                 RES 6, B
+
+                JR Command_BCDE
+; -----------------------------------------
+; append PointSize command to CMD buffer
+; In :
+;   DE - size
+; Out :
+; Corrupt :
+;   HL, B
+; -----------------------------------------
+PointSize:      LD A, D
+                AND #1F
+                LD D, A
+                LD BC, #0D00
 
                 JR Command_BCDE
 BufferPtr:      DW #0000

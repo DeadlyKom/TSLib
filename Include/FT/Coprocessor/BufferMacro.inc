@@ -263,9 +263,9 @@ FT_BitmapTransform      macro Sx0?, Sy0?, Sx1?, Sy1?, Sx2?, Sy2?, Tx0?, Ty0?, Tx
                         FT_CMD_BUF Result?
                         endm
 FT_String               macro Address?, Length?
-                        LD HL, Address? & 0xFFFF
-                        LD BC, Length?  & 0xFFFF
-                        CALL Copy
+                        LD HL, (Address?) & 0xFFFF
+                        LD BC, (Length?)  & 0xFFFF
+                        CALL FT.Coprocessor.Copy
                         endm
 FT_Printf               macro Source?, Destination?
                         LD HL, Source?
@@ -275,7 +275,7 @@ FT_Printf               macro Source?, Destination?
                         LD B, #00
                         LD C, A
                         LD HL, Destination?
-                        CALL Copy
+                        CALL FT.Coprocessor.Copy
                         endm
 FT_CMD_Command_DEBC_M   macro 
                         LD HL, (FT.Coprocessor.BufferPtr)

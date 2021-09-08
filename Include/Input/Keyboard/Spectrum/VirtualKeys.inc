@@ -1,6 +1,7 @@
 
                     ifndef _INPUT_KEYBOARD_VIRTUAL_KEYS_
                     define _INPUT_KEYBOARD_VIRTUAL_KEYS_
+
 VK_CAPS_SHIFT       EQU 0x00
 VK_Z                EQU 0x01
 VK_X                EQU 0x02

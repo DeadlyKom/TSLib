@@ -1,6 +1,7 @@
 
                 ifndef _EXAMPLE_CORE_MAIN_LOOP_
                 define _EXAMPLE_CORE_MAIN_LOOP_
+
 MainLoop:       ; maybe some code
                 ; ...
 

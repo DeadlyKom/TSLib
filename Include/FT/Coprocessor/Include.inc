@@ -6,8 +6,9 @@
 
             include "Macro.inc"
             include "Cmd.asm"
-            include "BufferMacro.inc"
+
             include "Buffer.asm"
+            include "BufferMacro.inc"
 
             include "IsFault.asm"
             include "WaitFlush.asm"
