@@ -16,6 +16,7 @@ TSLib is a library that makes it easy to start developing for ZX-Evolution for T
 Links:
 - [TS-Conf Doc](https://github.com/tslabs/zx-evo/tree/master/pentevo/docs/TSconf) RUS/ENG
 - [TS-Conf Ports](https://onedrive.live.com/Edit.aspx?resid=D0F740FDE3F507EB!1163&wd=cpe) ENG
+- [gd2-lib](https://github.com/Godzil/gd2-lib) ENG
 - [EVE2 / EVE3 / EVE4 code library](https://github.com/RudolphRiedel/FT800-FT813) ENG
 - [Utils](https://brtchip.com/eve-toolchains/#ESD4) ENG
 - [Image File Conversion](https://www.ftdichip.com/Support/Documents/AppNotes/AN_303%20FT800%20Image%20File%20Conversion.pdf) ENG
