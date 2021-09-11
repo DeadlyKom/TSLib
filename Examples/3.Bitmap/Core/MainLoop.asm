@@ -6,7 +6,10 @@ MOVE_LEFT       EQU 0xFF
 MOVE_STOP       EQU 0x00
 MOVE_RIGHT      EQU 0x01
 ANIMATION_IDLE  EQU 0x06
+ANIMATION_DELAY EQU 0x02
 NUM_ANIMATION   EQU 0x08
+
+PARALLAX_SPEED  EQU 0x01
 
 RES_WIDTH       EQU 1024
 CHAR_POS_Y      EQU 600
@@ -17,6 +20,7 @@ CHAR_SCALE      EQU 2
 
 CHAR_RAM_G      EQU Character_FTRAM_1
 CHAR_STRIDE     EQU Character_Stride_1
+CHAR_FORMAT     EQU Character_Format_1
 
 MainLoop:       ; maybe some code
                 ; ...
@@ -98,7 +102,13 @@ PrevAnimation:  ; switch to previous animation
                 AND NUM_ANIMATION - 1       ; clamp
                 LD (AnimatePlayer), A
                 RET
-NextAnimation:  ; switch to next animation
+NextAnimation:  
+                LD HL, AnimateDelay
+                DEC (HL)
+                RET NZ
+                LD (HL), ANIMATION_DELAY
+
+                ; switch to next animation
                 LD A, (AnimatePlayer)
                 INC A
                 AND NUM_ANIMATION - 1       ; clamp
@@ -143,18 +153,18 @@ DrawPlayer:     ; set default matrix
                 FT_Scale CHAR_SCALE << 16, CHAR_SCALE << 16             ; scale along the x- y- axes
                 JP .Draw
 
-.Mirror         FT_Translate CHAR_WIDTH << 4, 0 << 4
-                FT_Scale -CHAR_SCALE << 16 , CHAR_SCALE << 16
-                FT_Translate -CHAR_WIDTH << 4, 0 << 4
+.Mirror         FT_Translate (CHAR_WIDTH) << 16, 0 << 16
+                FT_Scale -2 << 16 , 2 << 16
+                FT_Translate -(CHAR_WIDTH >> 1) << 16, 0 << 16
                
 .Draw           FT_SetMatrix                                            ; apply transform
                 FT_SaveContext
                 
                 ; seting character sprite
                 FT_BitmapHandle 11
-                FT_BitmapSource Character_FTRAM_1
-                FT_BitmapLayout CHAR_RAM_G, CHAR_STRIDE, CHAR_HEIGHT
-                FT_BitmapSize FT_NEAREST, FT_REPEAT, FT_BORDER, CHAR_WIDTH * CHAR_SCALE, CHAR_HEIGHT * CHAR_SCALE
+                FT_BitmapSource CHAR_RAM_G
+                FT_BitmapLayout CHAR_FORMAT, CHAR_STRIDE, CHAR_HEIGHT
+                FT_BitmapSize FT_NEAREST, FT_BORDER, FT_BORDER, CHAR_WIDTH * CHAR_SCALE, CHAR_HEIGHT * CHAR_SCALE
 
                 FT_Begin FT_BITMAPS
                 ; select animation
@@ -358,70 +368,70 @@ ShiftLayer:     EXX
 MoveParallax:   ; shift layer (1)
                 EXX
                 LD HL, Timeline.t01             ; pointer to timeline t01
-                LD BC, 1024                     ; shift value of the current layer [-16384 .. 16384]
+                LD BC, PARALLAX_SPEED * 512     ; shift value of the current layer [-16384 .. 16384]
                 EXX
                 CALL ShiftLayer
 
                 ; shift layer (2)
                 EXX
                 LD HL, Timeline.t02             ; pointer to timeline t02
-                LD BC, 512                      ; shift value of the current layer [-16384 .. 16384]
+                LD BC, PARALLAX_SPEED * 256     ; shift value of the current layer [-16384 .. 16384]
                 EXX
                 CALL ShiftLayer
 
                 ; shift layer (3)
                 EXX
                 LD HL, Timeline.t03             ; pointer to timeline t03
-                LD BC, 256                      ; shift value of the current layer [-16384 .. 16384]
+                LD BC, PARALLAX_SPEED * 128     ; shift value of the current layer [-16384 .. 16384]
                 EXX
                 CALL ShiftLayer
 
                 ; shift layer (4)
                 EXX
                 LD HL, Timeline.t04             ; pointer to timeline t04
-                LD BC, 128                      ; shift value of the current layer [-16384 .. 16384]
+                LD BC, PARALLAX_SPEED * 64      ; shift value of the current layer [-16384 .. 16384]
                 EXX
                 CALL ShiftLayer
 
                 ; shift layer (5)
                 EXX
                 LD HL, Timeline.t05             ; pointer to timeline t05
-                LD BC, 64                       ; shift value of the current layer [-16384 .. 16384]
+                LD BC, PARALLAX_SPEED * 32      ; shift value of the current layer [-16384 .. 16384]
                 EXX
                 CALL ShiftLayer
 
                 ; shift layer (6)
                 EXX
                 LD HL, Timeline.t06             ; pointer to timeline t06
-                LD BC, 32                       ; shift value of the current layer [-16384 .. 16384]
+                LD BC, PARALLAX_SPEED * 16      ; shift value of the current layer [-16384 .. 16384]
                 EXX
                 CALL ShiftLayer
 
                 ; shift layer (7)
                 EXX
                 LD HL, Timeline.t07             ; pointer to timeline t07
-                LD BC, 16                       ; shift value of the current layer [-16384 .. 16384]
+                LD BC, PARALLAX_SPEED * 8       ; shift value of the current layer [-16384 .. 16384]
                 EXX
                 CALL ShiftLayer
 
                 ; shift layer (8)
                 EXX
                 LD HL, Timeline.t08             ; pointer to timeline t08
-                LD BC, 8                        ; shift value of the current layer [-16384 .. 16384]
+                LD BC, PARALLAX_SPEED * 4       ; shift value of the current layer [-16384 .. 16384]
                 EXX
                 CALL ShiftLayer
 
                 ; shift layer (9)
                 EXX
                 LD HL, Timeline.t09             ; pointer to timeline t09
-                LD BC, 4                        ; shift value of the current layer [-16384 .. 16384]
+                LD BC, PARALLAX_SPEED * 2       ; shift value of the current layer [-16384 .. 16384]
                 EXX
                 CALL ShiftLayer
 
                 ; shift layer (10)
                 EXX
                 LD HL, Timeline.t0A             ; pointer to timeline t0A
-                LD BC, 2                        ; shift value of the current layer [-16384 .. 16384]
+                LD BC, PARALLAX_SPEED * 1       ; shift value of the current layer [-16384 .. 16384]
                 EXX
                 CALL ShiftLayer
 
@@ -442,6 +452,7 @@ Timeline:
 
 Direction:      DB MOVE_STOP
 .Last           DB MOVE_STOP
-AnimatePlayer:  DB #06
+AnimatePlayer:  DB ANIMATION_IDLE
+AnimateDelay:   DB ANIMATION_DELAY
 
                 endif ; ~_EXAMPLE_CORE_MAIN_LOOP_
