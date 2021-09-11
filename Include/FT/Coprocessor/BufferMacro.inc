@@ -238,10 +238,15 @@ FT_Inflate              macro Destination?
 FT_LoadIdentity         macro
                         FT_CMD_BUF FT_CMD_LOADIDENTITY
                         endm
+FT_Translate            macro TranslateX?, TranslateY?
+                        FT_CMD_BUF FT_CMD_TRANSLATE
+                        FT_CMD_BUF (TranslateX?)
+                        FT_CMD_BUF (TranslateY?)
+                        endm
 FT_Scale                macro ScaleX?, ScaleY?
                         FT_CMD_BUF FT_CMD_SCALE
-                        FT_CMD_BUF ScaleX?
-                        FT_CMD_BUF ScaleY?
+                        FT_CMD_BUF (ScaleX?)
+                        FT_CMD_BUF (ScaleY?)
                         endm
 FT_SetMatrix            macro
                         FT_CMD_BUF FT_CMD_SETMATRIX

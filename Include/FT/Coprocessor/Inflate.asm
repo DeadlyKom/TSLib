@@ -5,7 +5,7 @@
 ; decompress the compressed data into RAM_G
 ; In :
 ;   ADE - destination address in RAM_G
-;   BC  - number of bytes
+;   B'BC  - number of bytes
 ;   HL  - source offset 0x3FFF
 ;   A'  - start page
 ; Out :
@@ -39,6 +39,9 @@ Inflate:        ; wait till the decompression was done
                 LD A, H
                 OR %11000000
                 LD H, A
+                EXX
+
+.LoopOver       EXX
 
 .Loop           PUSH HL
 
@@ -66,6 +69,11 @@ Inflate:        ; wait till the decompression was done
                 LD B, D
                 LD C, E
 
+                ; ; it's 64kb
+                ; LD A, H
+                ; OR L
+                ; JR Z, .NotEnoughSpace
+
                 ; size = min(remainder, size)
                 OR A
                 SBC HL, DE
@@ -92,6 +100,10 @@ Inflate:        ; wait till the decompression was done
                 LD A, B
                 OR C
                 JR NZ, .Loop
+
+                ; EXX
+                ; DJNZ .LoopOver
+                ; EXX
 
 .ContanerPage   EQU $+1
                 LD A, #00

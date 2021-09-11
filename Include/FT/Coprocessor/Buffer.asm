@@ -167,6 +167,23 @@ PointSize:      LD A, D
                 LD BC, #0D00
 
                 JR Command_BCDE
+; -----------------------------------------
+; append Cell command to CMD buffer
+; In :
+;   A - cell
+; Out :
+; Corrupt :
+;   HL, B
+; -----------------------------------------
+Cell:           AND #7F
+                LD E, A
+                XOR A
+                LD D, A
+                LD C, A
+                LD B, #06
+
+                JR Command_BCDE
+
 BufferPtr:      DW #0000
 
                 endif ; ~_COPROCESSOR_BUFFER_

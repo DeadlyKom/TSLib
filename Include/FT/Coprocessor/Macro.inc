@@ -4,20 +4,23 @@
 ; -----------------------------------------
 ; decompress the compressed data into RAM_G
 ; In :
-;   ADE - destination address in RAM_G
-;   BC  - number of bytes
-;   HL  - source offset 0x3FFF
-;   A'  - start page
+;   Destination? - destination address in RAM_G
+;   Page?        - start page
+;   Source?      - source offset 0x3FFF
+;   Size?        - number of bytes
 ; Out :
 ;   if the C flag is set, the coprocessor is fault,
 ;   otherwise the command FIFO buffer is empty
 ; Corrupt :
-;   HL, DE, BC, AF, AF'
+;   HL, DE, BC, AF, AF', B'
 ; Note:
 ; -----------------------------------------
 FT_WR_INFLATE   macro Destination?, Page?, Source?, Size?
                 LD HL, (Source?) & 0xFFFF
                 LD DE, (Destination?) & 0xFFFF
+                EXX
+                LD B, 1 + ((Size?) >> 16) & 0xFF
+                EXX
                 LD BC, (Size?) & 0xFFFF
                 LD A, (Page?) & 0xFF
                 EX AF, AF'

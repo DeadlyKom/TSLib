@@ -3,7 +3,28 @@
                 define _MATH_RAND_16
 
                 module Math
-
+; -----------------------------------------
+; set 16-bit first seed
+; In :
+;   HLDE - seed
+; Out :
+; Corrupt :
+; Note:
+; -----------------------------------------
+Seed16_F:       LD (Rand16.Seed_FH), HL
+                LD (Rand16.Seed_FL), DE
+                RET
+; -----------------------------------------
+; set 16-bit second seed
+; In :
+;   HLDE - seed
+; Out :
+; Corrupt :
+; Note:
+; -----------------------------------------
+Seed16_S:       LD (Rand16.Seed_SL), HL
+                LD (Rand16.Seed_SL), DE
+                RET
 ; -----------------------------------------
 ; 16-bit random number generator
 ; In :
