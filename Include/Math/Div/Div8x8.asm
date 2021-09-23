@@ -16,7 +16,7 @@
 ; Note:
 ;   https://www.smspower.org/Development/DivMod
 ; -----------------------------------------
-Div8_8:         XOR A
+Div8x8:         XOR A
                 LD B, #08
 .Loop           SLA D
                 RLA
