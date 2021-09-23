@@ -15,6 +15,12 @@ TSLib is a library that makes it easy to start developing for ZX-Evolution for T
 ---
 ![Bitmap](https://user-images.githubusercontent.com/23453697/132960607-2a8d8a36-bc4c-4ffb-9cc7-b18b147dddaf.gif)
 ---
+---
+[4.Noise](https://github.com/DeadlyKom/TSLib/tree/main/Examples/4.Noise)
+---
+![4 Noise](https://user-images.githubusercontent.com/23453697/134525488-571f0d9e-f5f2-4882-9765-77a168702935.gif)
+---
+
 Links:
 - [TS-Conf Doc](https://github.com/tslabs/zx-evo/tree/master/pentevo/docs/TSconf) RUS/ENG
 - [TS-Conf Ports](https://onedrive.live.com/Edit.aspx?resid=D0F740FDE3F507EB!1163&wd=cpe) ENG
@@ -24,7 +30,7 @@ Links:
 - [Image File Conversion](https://www.ftdichip.com/Support/Documents/AppNotes/AN_303%20FT800%20Image%20File%20Conversion.pdf) ENG
 - [FT81X Simple PIC Library Examples](https://brtchip.com/wp-content/uploads/Support/Documentation/Application_Notes/ICs/EVE/BRT_AN_014_FT81X_Simple_PIC_Library_Examples.pdf) ENG
 - [The Gameduino 2 Tutorial, Reference and Cookbook](https://trello.com/c/DSUEa9z7/23-ft812) ENG
-
+- [Floating-point library for Z80](https://github.com/DW0RKiN/Floating-point-Library-for-Z80#binary16-half) ENG
 ---
 - [Setting up the environment](https://hype.retroscene.org/blog/dev/946.html) RUS
 ***
