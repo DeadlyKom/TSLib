@@ -3,7 +3,8 @@
 
 @REM set Project=1.Empty
 @REM set Project=2.HelloWorld
-set Project=3.Bitmap
+@REM set Project=3.Bitmap
+set Project=4.Noise
 @REM set Project=Demo
 
 Build\_sjasmplus\sjasmplus.exe --fullpath --lstlab --sym=Build\Tmp\%Project%.labels --lst=Build\Tmp\%Project%.list --sld=Build\Tmp\%Project%.sld Examples\%Project%\Configuration.inc

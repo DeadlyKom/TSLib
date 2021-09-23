@@ -15,7 +15,7 @@
 ; Note:
 ;   http://z80-heaven.wikidot.com/math#toc8
 ; -----------------------------------------
-MulInt32x8_40: 
+MulInt32x8_40:  ; TODO optimize
                 EXX
                 PUSH HL
                 PUSH DE
