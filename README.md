@@ -18,7 +18,7 @@ TSLib is a library that makes it easy to start developing for ZX-Evolution for T
 ---
 [4.Noise](https://github.com/DeadlyKom/TSLib/tree/main/Examples/4.Noise)
 ---
-![4 Noise](https://user-images.githubusercontent.com/23453697/134525488-571f0d9e-f5f2-4882-9765-77a168702935.gif)
+![4 PerlinNoise](https://user-images.githubusercontent.com/23453697/134528662-663835bc-37b3-439c-afcc-02fa6bbc22b2.gif) ![4 Noise](https://user-images.githubusercontent.com/23453697/134525488-571f0d9e-f5f2-4882-9765-77a168702935.gif)
 ---
 
 Links:
