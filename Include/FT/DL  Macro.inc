@@ -127,11 +127,13 @@ FT_CLEAR                    macro  Color?, Stencil?, Tag?
 FT_VERTEX_FORMAT            macro Frac?
                             DEFD (39 << 24) | (Frac? & 7)
                             endm
+                            ; allows arguments to be used without force shift
 FT_BITMAP_LAYOUT_H          macro Linestride?, Height?
-                            DEFD (40 << 24) | (((Linestride?) & 3) << 2) | (((Height?) & 3) << 0)
+                            DEFD (40 << 24) | (((Linestride? >> 10) & 3) << 2) | (((Height? >> 9) & 3) << 0)
                             endm
+                            ; allows arguments to be used without force shift
 FT_BITMAP_SIZE_H            macro Width?, Height?
-                            DEFD (41 << 24) | (((Width?) & 3) << 2) | (((Height?) & 3) << 0)
+                            DEFD (41 << 24) | (((Width? >> 9) & 3) << 2) | (((Height? >> 9) & 3) << 0)
                             endm
 FT_PALETTE_SOURCE           macro Address?
                             DEFD (42 << 24) | (Address? & 0x3FFFFF)

@@ -361,7 +361,7 @@ FT_WR_DL        macro Source?, Offset?, Size?
                 LD A, (FT_RAM_DL >> 16) & 0xFF
                 LD DE, Offset? & FT_DL_MASK
                 LD BC, Size? & FT_DL_MASK
-                CALL WriteMem
+                CALL FT.WriteMem
                 endm
 ; -----------------------------------------
 ; write a data to the FIFO command i.e. RAM_CMD
