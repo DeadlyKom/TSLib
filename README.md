@@ -20,7 +20,8 @@ TSLib is a library that makes it easy to start developing for ZX-Evolution for T
 ---
 ![4 PerlinNoise](https://user-images.githubusercontent.com/23453697/134528662-663835bc-37b3-439c-afcc-02fa6bbc22b2.gif) ![4 Noise](https://user-images.githubusercontent.com/23453697/134525488-571f0d9e-f5f2-4882-9765-77a168702935.gif)
 ---
-
+[Game](https://github.com/DeadlyKom/TSLib/tree/main/Examples/Game)
+---
 Links:
 - [TS-Conf Doc](https://github.com/tslabs/zx-evo/tree/master/pentevo/docs/TSconf) RUS/ENG
 - [TS-Conf Ports](https://onedrive.live.com/Edit.aspx?resid=D0F740FDE3F507EB!1163&wd=cpe) ENG
