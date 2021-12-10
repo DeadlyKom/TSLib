@@ -124,6 +124,13 @@ FT_Display              macro
 FT_End                  macro
                         FT_CMD_BUF (0x21 << 24)
                         endm
+FT_CMD_Swap             macro
+                        FT_CMD_BUF (FT_CMD_SWAP)
+                        endm
+FT_CMD_Interrupt        macro ms?
+                        FT_CMD_BUF (FT_CMD_INTERRUPT)
+                        FT_CMD_BUF (ms? & 0xFFFFFFFF)
+                        endm
 FT_Jump                 macro Address?
                         FT_CMD_BUF ((0x1E << 24) | (((Address?) & 0xFFFF) << 0))
                         endm

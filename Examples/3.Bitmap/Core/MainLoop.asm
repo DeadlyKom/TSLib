@@ -43,15 +43,16 @@ MainLoop:       ; maybe some code
                 FT_SetMatrix
 
                 FT_Display
+                FT_CMD_Swap
+                FT_CMD_Interrupt 0
                 FT_CMD_Write
-
-                ; swap display list
-                FT_WR_REG8 FT_REG_DLSWAP, FT_DLSWAP_FRAME
                 
-.WaitIntSwap    ; wait, swap display list
+.WaitIntSwap    ; wait, swap display list (wait interrupt delay 'FT_CMD_Interrupt 0')
                 FT_RD_REG8 FT_REG_INT_FLAGS
-                AND FT_INT_SWAP
+                AND FT_INT_CMDFLAG
                 JR Z, .WaitIntSwap
+
+                ; CALL FT.Coprocessor.Wait
 
                 CALL Input                          ; handler input
 

@@ -43,7 +43,7 @@ Init_Video:     ; reset coprocessor
                 FT_RESOLUTION VM_1024_768_59Hz, ResolutionWidthPtr
 
                 ; enable interrupt on display list swap occurred
-                FT_WR_REG8 FT_REG_INT_MASK, FT_INT_SWAP
+                FT_WR_REG8 FT_REG_INT_MASK, FT_INT_CMDFLAG
                 FT_WR_REG8 FT_REG_INT_EN, 1
 
                 ; switch the screen to FT mode and disable the display of the Spectrum screen

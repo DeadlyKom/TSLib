@@ -166,6 +166,37 @@ Write32:        PUSH AF
                 OR A                                        ; reset flag C
 
                 RET
+; -----------------------------------------
+; FT812 coprocessor
+; In :
+; Out :
+;   if the C flag is set, the coprocessor is fault,
+;   otherwise the command or data has successfully append to FIFO
+; Corrupt :
+;   F
+; Note:
+; -----------------------------------------
+Wait:           CALL IsFault
+                JR NC, .IsNotFault
+                ifdef DEBUG_EVE
+                POP BC
+                POP AF
+                JP DisplayError
+                else
+                POP BC
+                POP AF
+                SCF                                         ; set flag C
+                RET
+                endif
+
+.IsNotFault     ; coprocessor not fault
+
+                ; read available CMDB buffer space
+                FT_RD_REG16 FT_REG_CMDB_SPACE
+                LD A, B
+                OR C
+                JR Z, Wait
+                RET
 
                 ifdef DEBUG_EVE
 ; -----------------------------------------
