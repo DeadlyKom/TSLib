@@ -22,6 +22,8 @@ TSLib is a library that makes it easy to start developing for ZX-Evolution for T
 ---
 [Game](https://github.com/DeadlyKom/TSLib/tree/main/Examples/Game)
 ---
+[Prototype](https://github.com/DeadlyKom/TSLib/tree/PrototypeGame/Examples/Prototype)
+---
 Links:
 - [TS-Conf Doc](https://github.com/tslabs/zx-evo/tree/master/pentevo/docs/TSconf) RUS/ENG
 - [TS-Conf Ports](https://onedrive.live.com/Edit.aspx?resid=D0F740FDE3F507EB!1163&wd=cpe) ENG
