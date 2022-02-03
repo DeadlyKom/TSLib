@@ -6,7 +6,8 @@
 @REM set Project=3.Bitmap
 @REM set Project=4.Noise
 @REM set Project=Demo
-set Project=Game
+@REM set Project=Game
+set Project=Prototype
 
 Build\_sjasmplus\sjasmplus.exe --fullpath --lstlab --sym=Build\Tmp\%Project%.labels --lst=Build\Tmp\%Project%.list --sld=Build\Tmp\%Project%.sld Examples\%Project%\Configuration.inc
 
