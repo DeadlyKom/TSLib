@@ -1,0 +1,36 @@
+{
+    // language-specific settings to change native behaviour of VSCode
+    "[z80-macroasm]": {
+    //     "editor.tabSize": 4,
+    //     "editor.insertSpaces": false,
+        "editor.rulers": [80],
+    //     "files.eol": "\n",
+
+    //     // disables color swatches or "pigments" on minimap because
+    //     // hex-values starting with `#` are common number format in asm
+    //     "editor.colorDecorators": false,
+    //     // formatting while typing a code (disable if you find it intrusive)
+        "editor.formatOnType": false,
+    },
+
+    // "z80-macroasm.files.include": "**/*.{a80,asm,inc}",
+    // // enable seekSymbolsThroughWorkspace on non-modular projects without imports
+    "z80-macroasm.seekSymbolsThroughWorkspace": true,
+    // "z80-macroasm.format.enabled": false,
+    // "z80-macroasm.format.baseIndent": 2,
+    // "z80-macroasm.format.controlIndent": 111,
+    // "z80-macroasm.format.whitespaceAfterInstruction": "tab",
+    // "z80-macroasm.format.spaceAfterArgument": true,
+    // "z80-macroasm.format.uppercaseKeywords": true,
+    // "z80-macroasm.format.bracketType": "no-change",
+    // "z80-macroasm.format.colonAfterLabels": "no-change",
+    // "z80-macroasm.format.hexaNumberStyle": "no-change",
+    // "z80-macroasm.format.hexaNumberCase": "no-change",
+    // "z80-macroasm.format.splitInstructionsByColon": false,
+
+    // // overrides associations for another assembly language
+    // // parsers and extensions to prevent from mismatches
+    // "files.associations": {
+    //     "*.{a80,asm,inc}": "z80-macroasm"
+    // },
+}
