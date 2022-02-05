@@ -1,13 +1,14 @@
-                ifndef _FIXED_2_14_ADD_
-                define _FIXED_2_14_ADD_
+                ifndef _FIXED_18_14_ADD_
+                define _FIXED_18_14_ADD_
 ; -----------------------------------------
-; add two fixed-point numbers 2:14
+; add two fixed-point numbers 18:14
 ; In:
-;   HL, DE numbers to add
+;   HLHL' - fixed-point numbers 18:14
+;   BCBC' - fixed-point numbers 18:14
 ; Out:
-;   HL = HL + DE, if define OVERFLOW set carry
+;   HLBC = HLHL' + BCBC', if define OVERFLOW set carry
 ; Corrupt:
-;   HL, DE, AF, AF'
+;   HL, BC, AF, HL', AF'
 ; Note:
 ;   define CARRY_FLOW_WARNING - calling the overflow error display function 'OVER_COL_WARNING'
 ;   define OVERFLOW           - reflect overflow result in carry flag
@@ -16,30 +17,36 @@ ADD:            ; definition of subtraction/addition operation
                 LD A, H
                 EX AF, AF'                                                      ; save 7 bits for resulting sign
                 LD A, H
-                XOR D
+                XOR B
 
                 ; reset signs of two numbers
-                RES 7, H
-                RES 7, D
+                RES 7, H                                                        ; reset sign lvalue
+                RES 7, B                                                        ; reset sign rvalue
                 JP M, SUBP                                                      ; jump if sign flag is set, it's subtraction operation
 
 ; -----------------------------------------
-; add two fixed-point numbers 2:14 with the same sign
+; add two fixed-point numbers 18:14 with the same sign
 ; In:
-;   HL, DE numbers to add
+;   HLHL' - fixed-point numbers 18:14
+;   BCBC' - fixed-point numbers 18:14
 ; Out:
-;   HL = HL + DE, if define OVERFLOW set carry
+;   HLBC = HLHL' + BCBC',  if define OVERFLOW set carry
 ; Corrupt:
-;   HL, DE, AF, AF'
+;   HL, BC, AF, HL', AF'
 ; Note:
 ;   define CARRY_FLOW_WARNING - calling the overflow error display function 'OVER_COL_WARNING'
 ;   define OVERFLOW           - reflect overflow result in carry flag
 ;
-;   HL = (+HL) + (+DE)
-;   HL = (-HL) + (-DE)
+;   HLBC = (+HLHL') + (+BCBC')
+;   HLBC = (-HLHL') + (-BCBC')
 ; -----------------------------------------
 ADDP:           ; addition operation
-                ADD HL, DE
+                EXX
+                ADD HL, BC
+                PUSH HL
+                EXX
+                ADC HL, BC
+                POP BC
 
                 ; check for overflow
                 BIT 7, H
@@ -53,7 +60,8 @@ ADDP:           ; addition operation
                 RET
 
 .Overflow       ; set maximum available value
-                LD HL, FIXED_214_MAX_P
+                LD HL, (FIXED_1814_MAX_P >> 16) & 0xFFFF
+                LD BC, (FIXED_1814_MAX_P >>  0) & 0xFFFF
                 ifdef COLOR_FLOW_WARNING
                 CALL OVER_COL_WARNING
                 endif
@@ -62,4 +70,4 @@ ADDP:           ; addition operation
                 endif
                 RET
 
-                endif ; ~_FIXED_2_14_ADD_
+                endif ; ~_FIXED_18_14_ADD_
