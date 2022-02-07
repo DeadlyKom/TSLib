@@ -10,7 +10,7 @@
 ; Out :
 ;   DEHL - product BC * DE
 ; Corrupt :
-;   HL, DE, BC, A
+;   HL, DE, AF
 ; -----------------------------------------
 Mul_16x16:      LD A, D
                 LD D, #00
