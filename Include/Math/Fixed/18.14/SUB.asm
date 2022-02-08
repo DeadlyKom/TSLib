@@ -34,8 +34,9 @@ SUB:            ; definition of subtraction/addition operation
 ; Corrupt:
 ;   HL, DE, BC, AF, HL', AF'
 ; Note:
-;   define CARRY_FLOW_WARNING - calling the overflow error display function 'OVER_COL_WARNING'
-;   define OVERFLOW           - reflect overflow result in carry flag
+;   define FIXED_CHECK_OVERFLOW - adds an overflow check
+;   define CARRY_FLOW_WARNING   - calling the overflow error display function 'OVER_COL_WARNING'
+;   define OVERFLOW             - reflect overflow result in carry flag
 ;
 ;   HLBC = (+HLHL') - (+BCBC') = (+HLHL') + (-BCBC')
 ;   HLBC = (-HLHL') - (-BCBC') = (-HLHL') + (+BCBC')
@@ -76,9 +77,11 @@ SUBP            ; subtraction operation
                 DEC C
                 ADC HL, BC
 
+                ifdef FIXED_CHECK_OVERFLOW
                 ; check for overflow
                 BIT 7, H
-                JR NZ, .Overflow
+                JR NZ, MinOverflow
+                endif
 
                 ; set low value
                 LD B, D
@@ -96,17 +99,6 @@ SUBP            ; subtraction operation
                 RLA
                 RET NC
                 SET 7, H
-                RET
-
-.Overflow       ; set the minimum negative value available
-                LD HL, (FIXED_1814_MIN_N >> 16) & 0xFFFF
-                LD BC, (FIXED_1814_MIN_N >>  0) & 0xFFFF
-                ifdef COLOR_FLOW_WARNING
-                CALL OVER_COL_WARNING
-                endif
-                ifdef CARRY_FLOW_WARNING
-                SCF                                                             ; set carry, it's error
-                endif
                 RET
 
                 endif ; ~_FIXED_18_14_SUB_

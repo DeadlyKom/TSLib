@@ -19,8 +19,8 @@ MUL:            ; determining the resulting sign
                 RES 7, D
                 RES 7, B
 
-                ; multiply valie BC by DE
-                CALL Math.Mult_16x16                                            ; DEHL = BC * DE
+                ; multiply value BC by DE
+                CALL Math.Mul_16x16                                             ; DEHL = BC * DE
 
                 ; HLHL' = DEHL << 2
                 LD A, H
@@ -30,13 +30,14 @@ MUL:            ; determining the resulting sign
                 ADD A, A
                 ADC HL, HL
                 EXX
-                LD HL, #0000
 
-                ; set the resulting sign
+                ; set the resulting sign and high byte set zero
                 EX AF, AF'                                                      ; restore 7 bits for resulting sign
                 RLA
-                RET NC
-                SET 7, H
+                LD A, #00
+                LD L, A
+                RRA
+                LD H, A
                 RET
 
                 endif ; ~_FIXED_2_14_MUL_

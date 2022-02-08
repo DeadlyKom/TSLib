@@ -32,8 +32,9 @@ ADD:            ; definition of subtraction/addition operation
 ; Corrupt:
 ;   HL, DE, AF, AF'
 ; Note:
-;   define CARRY_FLOW_WARNING - calling the overflow error display function 'OVER_COL_WARNING'
-;   define OVERFLOW           - reflect overflow result in carry flag
+;   define FIXED_CHECK_OVERFLOW - adds an overflow check
+;   define CARRY_FLOW_WARNING   - calling the overflow error display function 'OVER_COL_WARNING'
+;   define OVERFLOW             - reflect overflow result in carry flag
 ;
 ;   HL = (+HL) + (+DE)
 ;   HL = (-HL) + (-DE)
@@ -41,25 +42,17 @@ ADD:            ; definition of subtraction/addition operation
 ADDP:           ; addition operation
                 ADD HL, DE
 
+                ifdef FIXED_CHECK_OVERFLOW
                 ; check for overflow
                 BIT 7, H
-                JR NZ, .Overflow
+                JR NZ, MaxOverflow
+                endif
 
                 ; set the resulting sign
                 EX AF, AF'                                                      ; restore 7 bits for resulting sign
                 RLA
                 RET NC
                 SET 7, H
-                RET
-
-.Overflow       ; set maximum available value
-                LD HL, FIXED_214_MAX_P
-                ifdef COLOR_FLOW_WARNING
-                CALL OVER_COL_WARNING
-                endif
-                ifdef CARRY_FLOW_WARNING
-                SCF                                                             ; set carry, it's error
-                endif
                 RET
 
                 endif ; ~_FIXED_2_14_ADD_
