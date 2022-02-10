@@ -1,0 +1,7 @@
+
+                ifndef _GAME_CELESTIAL_OBJECT_MOVE_CELESTIAL_OBJECT_
+                define _GAME_CELESTIAL_OBJECT_MOVE_CELESTIAL_OBJECT_
+
+Move:           RET
+
+                endif ; ~_GAME_CELESTIAL_OBJECT_MOVE_CELESTIAL_OBJECT_

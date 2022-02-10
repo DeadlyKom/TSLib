@@ -14,7 +14,7 @@
                 display "Building a \'", FILENAME_PROJECT, "\' example ..."
                 display "-------------------------------------------------------------------------------------------------------------------------------"
                 include "TSLib.inc"
-                include "Core/Prototype.inc"
+                include "Prototype.inc"
                 display "-------------------------------------------------------------------------------------------------------------------------------"
 
                 endif ; ~_EXAMPLE_CONFIGURATION_

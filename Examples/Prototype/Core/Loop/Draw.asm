@@ -1,15 +1,9 @@
 
-                ifndef _EXAMPLE_CORE_MAIN_LOOP_
-                define _EXAMPLE_CORE_MAIN_LOOP_
-
-MainLoop:       ; maybe some code
-                ; ...
-
-.Loop           FT_CMD_Start
+                ifndef _CORE_LOOP_DRAW_
+                define _CORE_LOOP_DRAW_
+Draw:           FT_CMD_Start
                 FT_DL_Start
                 
-                ; some draw code
-                ; ....
 
                 FT_Display
                 FT_CMD_Write
@@ -21,7 +15,6 @@ MainLoop:       ; maybe some code
                 FT_RD_REG8 FT_REG_INT_FLAGS
                 AND FT_INT_SWAP
                 JR Z, .WaitIntSwap
+                RET
 
-                JP .Loop
-
-                endif ; ~_EXAMPLE_CORE_MAIN_LOOP_
+                endif ; ~_CORE_LOOP_DRAW_

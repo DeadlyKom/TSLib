@@ -1,0 +1,7 @@
+
+                ifndef _GAME_CELESTIAL_OBJECT_UPDATE_SOLAR_SYSTEM_
+                define _GAME_CELESTIAL_OBJECT_UPDATE_SOLAR_SYSTEM_
+
+UpdateSolSys:   RET
+
+                endif ; ~_GAME_CELESTIAL_OBJECT_UPDATE_SOLAR_SYSTEM_

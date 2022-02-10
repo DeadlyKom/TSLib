@@ -4,6 +4,6 @@
 
 EntryPoint:     LD SP, StackTop
                 CALL Initialize
-                JP MainLoop
+                JP Loop.Main
 
                 endif ; ~_EXAMPLE_CORE_ENTRY_POINT_
