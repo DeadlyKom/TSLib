@@ -3,8 +3,9 @@
                 define _CORE_LOOP_DRAW_
 Draw:           FT_CMD_Start
                 FT_DL_Start
-                
 
+                CALL Game.CelestialObject.Draw
+                
                 FT_Display
                 FT_CMD_Write
 
@@ -15,6 +16,7 @@ Draw:           FT_CMD_Start
                 FT_RD_REG8 FT_REG_INT_FLAGS
                 AND FT_INT_SWAP
                 JR Z, .WaitIntSwap
+
                 RET
 
                 endif ; ~_CORE_LOOP_DRAW_

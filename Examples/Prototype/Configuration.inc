@@ -4,9 +4,9 @@
 
                 DEVICE ZXSPECTRUM4096
 
-                define KEYBOARD_PS2                                 ; обработка клавиатуры
-                define MAPPING_REGISTERS                            ; включить мапинг портов
-                define DEBUG_EVE                                    ; включить отладочную информацию FT812
+                define KEYBOARD_PS2                                             ; обработка клавиатуры
+                define MAPPING_REGISTERS                                        ; включить мапинг портов
+                define DEBUG_EVE                                                ; включить отладочную информацию FT812
 
                 include "Include.inc"
 
@@ -15,6 +15,7 @@
                 display "-------------------------------------------------------------------------------------------------------------------------------"
                 include "TSLib.inc"
                 include "Prototype.inc"
+                include "Data/Include.inc"
                 display "-------------------------------------------------------------------------------------------------------------------------------"
 
                 endif ; ~_EXAMPLE_CONFIGURATION_

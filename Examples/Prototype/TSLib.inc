@@ -3,7 +3,6 @@
                 define _EXAMPLE_TSLIB_INCLUDE_
                 
                 ORG TSLib
-
 TSLIB_Start:
                 include "../../Include/TSLib.inc"
                 include "../../Include/Math/Fixed/Include.inc"

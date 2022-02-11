@@ -17,6 +17,9 @@ InterruptVA_DMA     EQU InterruptVA + INT_VEC_DMA                               
 TSLib               EQU #1000                                                   ; адрес библиотеки TS-Conf
 TSLibPage           EQU #00                                                     ; страница в которой хранятся библиотека TS-Conf
 
+BUILD_Mesh          EQU #C000                                                   ; адрес мешей
+BUILD_MeshPage      EQU #FF                                                     ; страница в которой хранятся меши
+
                     include "Structure/Include.inc"
 
                     endif ; ~_EXAMPLE_INCLUDE_

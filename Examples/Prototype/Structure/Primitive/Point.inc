@@ -3,7 +3,7 @@
                 define _STRUCTURE_POINT_INCLUDE_
 
                 struct FPoint
-Index           DS 1, 0
+Index           DB #00
 
                 ends
 

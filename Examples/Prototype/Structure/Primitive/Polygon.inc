@@ -3,7 +3,12 @@
                 define _STRUCTURE_POLYGON_INCLUDE_
 
                 struct FPolygon
-Index           DS 5, 0
+Index           DB #00
+                DB #00
+                DB #00
+                DB #00
+                DB #00
+                DB #00
 
                 ends
 

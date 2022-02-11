@@ -3,7 +3,10 @@
                 define _CORE_LOOP_MAIN_
 
 Main:           ;
-.Loop           CALL Draw
+.Loop           ;
+                CALL Game.CelestialObject.UpdateSolSys
+
+                CALL Draw
 
                 JP .Loop
 

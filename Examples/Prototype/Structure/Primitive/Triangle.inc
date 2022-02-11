@@ -3,7 +3,10 @@
                 define _STRUCTURE_TRIANGLE_INCLUDE_
 
                 struct FTriangle
-Index           DS 3, 0
+Index           DB #00
+                DB #00
+                DB #00
+                DB #00
 
                 ends
 

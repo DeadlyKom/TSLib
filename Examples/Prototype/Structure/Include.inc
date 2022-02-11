@@ -10,4 +10,6 @@
                 include "CelestialData.inc"
                 include "CelestialObject.inc"
 
+                include "Player/Ship.inc"
+
                 endif ; ~_STRUCTURE_INCLUDE_

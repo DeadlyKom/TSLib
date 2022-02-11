@@ -3,13 +3,13 @@
                 define _EXAMPLE_CORE_INCLUDE_
 
                 ORG EntryPoint
-Start:
+PROTOTYPE_Start:
                 include "Core/Include.inc"
                 include "Game/Include.inc"
-End:
-Size:           EQU End - Start
+PROTOTYPE_End:
+PROTOTYPE_Size: EQU PROTOTYPE_End - PROTOTYPE_Start
 
-                display "Example:  \t\t", /A, Start, " = busy [ ", /D, Size, " bytes ]"
-                savebin "Examples/Prototype/Files/Core.bin", Start, Size
+                display "Prototype:  \t\t", /A, PROTOTYPE_Start, " = busy [ ", /D, PROTOTYPE_Size, " bytes ]"
+                savebin "Examples/Prototype/Files/Core.bin", PROTOTYPE_Start, PROTOTYPE_Size
 
                 endif ; ~_EXAMPLE_CORE_INCLUDE_

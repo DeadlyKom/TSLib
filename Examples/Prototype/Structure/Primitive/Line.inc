@@ -3,7 +3,8 @@
                 define _STRUCTURE_LINE_INCLUDE_
 
                 struct FLine
-Index           DS 2, 0
+Index           DB #00
+                DB #00
 
                 ends
 

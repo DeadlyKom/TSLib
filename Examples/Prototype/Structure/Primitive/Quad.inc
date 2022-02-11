@@ -3,7 +3,11 @@
                 define _STRUCTURE_QUAD_INCLUDE_
 
                 struct FQuad
-Index           DS 4, 0
+Index           DB #00
+                DB #00
+                DB #00
+                DB #00
+                DB #00
 
                 ends
 
