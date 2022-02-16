@@ -3,9 +3,11 @@
                 define _STRUCTURE_MESH_INCLUDE_
 
                 struct FMesh
-Vertices        DW #0000
+IndexBuffer     DW #0000
+VertixBuffer    DW #0000
 Normals         DW #0000
-IndexFaces      DW #0000
+Scale           DB #00
+TextureHandle   DB #00
 
                 ends
 

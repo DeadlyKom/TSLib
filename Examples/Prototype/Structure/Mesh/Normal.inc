@@ -3,9 +3,9 @@
                 define _STRUCTURE_NORMAL_INCLUDE_
 
                 struct FNormal
-X               FFixed214
-Y               FFixed214
-Z               FFixed214
+X               DW #0000                                                        ; FFixed214
+Y               DW #0000                                                        ; FFixed214
+Z               DW #0000                                                        ; FFixed214
 
                 ends
 

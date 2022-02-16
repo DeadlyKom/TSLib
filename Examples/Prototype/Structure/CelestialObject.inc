@@ -6,11 +6,11 @@
 Classification  DB #00                                                          ; тип объекта
 Location        FVector                                                         ; расположение объекта в пространстве 18:14
 MatrixRot       FMatrix                                                         ; матрица вращения объекта
-Rotation        FVectorHalf                                                     ; вращение объекта
-Velocity        DW #0000                                                        ; скорость объекта
-Acceleration	DW #0000                                                        ; ускорение объекта
-Flags			DW #0000                                                        ;
-Data            FCelestialData                                                  ;
+Rotation        FRotator                                                        ; вращение объекта
+Velocity        FWord                                                           ; скорость объекта
+Acceleration	FWord                                                           ; ускорение объекта
+Flags			FWord                                                           ;
+MeshInfo        FMeshInfo                                                       ; информация о меше объекта
 
                 ends
 

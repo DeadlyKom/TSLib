@@ -20,6 +20,7 @@ TSLibPage           EQU #00                                                     
 BUILD_Mesh          EQU #C000                                                   ; адрес мешей
 BUILD_MeshPage      EQU #FF                                                     ; страница в которой хранятся меши
 
+                    include "Const/Include.inc"
                     include "Structure/Include.inc"
 
                     endif ; ~_EXAMPLE_INCLUDE_

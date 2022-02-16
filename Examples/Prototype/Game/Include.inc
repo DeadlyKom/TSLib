@@ -6,7 +6,7 @@
 
                 module Game
 
-                include "Player/Include.inc"
+                include "Initialize/Include.inc"
                 include "CelestialObject/Include.inc"
 
                 endmodule

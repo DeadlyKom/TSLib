@@ -3,9 +3,9 @@
                 define _STRUCTURE_FACE_INCLUDE_
 
                 struct FFace
-Primitive       DB #00                                                          ; тип римитива
+Primitive       DB #00                                                          ; тип примитива
 Queue           DB #00                                                          ; 
-Color           FColor
+Normal          DB #00                                                          ; индекс нормали примитива
 
                 ends
 

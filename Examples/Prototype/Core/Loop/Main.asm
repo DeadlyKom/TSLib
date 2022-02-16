@@ -5,7 +5,6 @@
 Main:           ;
 .Loop           ;
                 CALL Game.CelestialObject.UpdateSolSys
-
                 CALL Draw
 
                 JP .Loop

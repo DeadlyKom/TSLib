@@ -9,7 +9,9 @@
                 include "UpdateCelestialObject.asm"
                 include "DrawCelestialObject.asm"
 
-                ; массив обрабатываемых объектов на сцене
+                include "Utils/Include.inc"
+
+                ; массив обрабатываемых объектов в космосе
 Array:          FCelestialNode = $
                 DS FCelestialNode * MAX_OBJECT
 .Size           DB #00                                                          ; размер массива

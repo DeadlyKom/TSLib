@@ -3,9 +3,9 @@
                 define _STRUCTURE_VERTEX_INCLUDE_
 
                 struct FVertex
-X               FFixed1814
-Y               FFixed1814
-Z               FFixed1814
+Position        FPosition       ZERO_POSITION
+Color           FColor          COLOR_BLACK
+TexCoord        FWordVector2D   ZERO_VECTOR
 
                 ends
 

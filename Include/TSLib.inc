@@ -14,4 +14,6 @@
             include "Video/Macro.inc"
             include "System/Macro.inc"
 
+            include "ZX/Color.inc"
+
             endif ; ~_TSLIB_INCLUDE_

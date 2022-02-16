@@ -6,11 +6,15 @@
                 ORG BUILD_Mesh
 BUILD_Start:
 .Skybox         EQU $
+.SkyboxOffset   EQU $ - BUILD_Mesh
+.SkyboxPage     EQU BUILD_MeshPage
                 FCelestialData {
                 {"SkyBox\0"},                                                   ; имя
-                Skybox.Vertexes,                                                ; вершины
-                Skybox.Normals,                                                 ; нормали
-                Skybox.Faces }                                                  ; обход вершин
+                MeshSkybox.Faces                                                ; обход вершин
+                MeshSkybox.Vertexes,                                            ; вершины
+                MeshSkybox.Normals,                                             ; нормали
+                MeshSkybox.Scale,                                               ; маcштаб
+                MeshSkybox.Handle }                                             ; 
                 include "Skybox.inc"                                            ; данные
 BUILD_End:
 .SkyboxSize     EQU ($-BUILD_Start.Skybox)

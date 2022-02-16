@@ -9,26 +9,20 @@
 ; Note:
 ; -----------------------------------------
 UpdateSolSys:   ; инициализация
-                LD DE, Array
+                LD IX, Array
                 LD A, (Array.Size)
                 LD (.Count), A
 
-.Loop           ; 
-                EX DE, HL                                                       ; востановим адрес текущего обрабатываемого объекта
-                PUSH HL
-
-                ; проверим тип объекта
-                LD A, (HL)                                                      ; HL = FCelestialNode.Classification
+.Loop           ; проверим тип объекта
+                LD A, (IX + FCelestialNode.Classification)
                 OR A
                 CALL NZ, UpdateObject                                           ; обновим объект, если тип известен
 
-                ; переход к следующему элементу массива
-                POP HL
-                LD DE, FCelestialNode
-                ADD HL, DE
-                EX DE, HL                                                       ; сохраним адрес обрабатываемого объекта
+.Next           ; переход к следующему элементу массива
+                LD BC, FCelestialNode
+                ADD IX, BC
 
-.Next           ; уменьшит счёткик обрабатываемых объектов
+                ; уменьшит счёткик обрабатываемых объектов
                 LD HL, .Count
                 DEC (HL)
                 JR NZ, .Loop

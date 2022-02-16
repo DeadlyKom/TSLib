@@ -4,15 +4,36 @@
 ; -----------------------------------------
 ; обновление объекта
 ; In:
-;   HL - указывает на обрабатываемый элемент FCelestialNode массива
+;   IX - указывает на обрабатываемый элемент FCelestialNode массива
+;   A  - содержит тип объекта
 ; Out:
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-UpdateObject:   ;
-                INC HL
-                LD DE, Game.Player.Ship.FlightRot
-                CALL Math.RotateLocation
+UpdateObject:   ; инициализация
+                LD IY, Game.Init.Player.Ship.FlightRot
+
+                ; проверка на объекты в центре
+                BIT NO_LOCATION_BIT, A
+                CALL Z, Math.RotateLocation
+
+                ; вращение right вектора
+                LD BC, FVector
+                ADD IX, BC
+                CALL Math.RotateRoll
+                CALL Math.RotatePitch
+
+                ; вращение up вектора
+                LD BC, FVectorHalf
+                ADD IX, BC
+                CALL Math.RotateRoll
+                CALL Math.RotatePitch
+
+                ; вращение forward вектора
+                LD BC, FVectorHalf
+                ADD IX, BC
+                CALL Math.RotateRoll
+                CALL Math.RotatePitch
 
                 RET
 
