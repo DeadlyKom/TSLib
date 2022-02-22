@@ -38,7 +38,7 @@ AddObject:      PUSH AF
 .Classification ; ---------------------------------------------
 
                 ; установка типа объекта
-                LD (IX + FCelestialNode.Classification), A
+                LD (IX + FSpaceObject.Classification), A
 
 .Location       ; ---------------------------------------------
 
@@ -120,7 +120,7 @@ SetObject:      ; инициализация
                 DEC B
                 JR Z, AddObject.Init
                 
-                LD DE, FCelestialNode
+                LD DE, FSpaceObject
 
 .Loop           ADD HL, DE
                 DJNZ .Loop

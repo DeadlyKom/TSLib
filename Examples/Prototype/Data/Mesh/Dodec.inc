@@ -3,30 +3,30 @@
                 define _MESH_DODEC_
 Skybox:
 .Vertexes       EQU $
-                FVectorHalf Fix.n0,         Fix.n9600,      Fix.n12544
-                FVectorHalf Fix.n9152,      Fix.n2944,      Fix.n12544
-                FVectorHalf Fix.n5632,      Fix.n7744_neg,  Fix.n12544
-                FVectorHalf Fix.n5632_neg,  Fix.n7744_neg,  Fix.n12544
-                FVectorHalf Fix.n9152_neg,  Fix.n2944,      Fix.n12544
-                FVectorHalf Fix.n0,         Fix.n15552,     Fix.n2944
-                FVectorHalf Fix.n14784,     Fix.n4800,      Fix.n2944
-                FVectorHalf Fix.n9152,      Fix.n12544_neg, Fix.n2944
-                FVectorHalf Fix.n9152_neg,  Fix.n12544_neg, Fix.n2944
-                FVectorHalf Fix.n14784_neg, Fix.n4800,      Fix.n2944
-                FVectorHalf Fix.n9152,      Fix.n12544,     Fix.n2944_neg
-                FVectorHalf Fix.n14784,     Fix.n4800_neg,  Fix.n2944_neg
-                FVectorHalf Fix.n0,         Fix.n15552_neg, Fix.n2944_neg
-                FVectorHalf Fix.n14784_neg, Fix.n4800_neg,  Fix.n2944_neg
-                FVectorHalf Fix.n9152_neg,  Fix.n12544,     Fix.n2944_neg
-                FVectorHalf Fix.n5632,      Fix.n7744,      Fix.n12544_neg
-                FVectorHalf Fix.n9152,      Fix.n2944_neg,  Fix.n12544_neg
-                FVectorHalf Fix.n0,         Fix.n9600_neg,  Fix.n12544_neg
-                FVectorHalf Fix.n9152_neg,  Fix.n2944_neg,  Fix.n12544_neg
-                FVectorHalf Fix.n5632_neg,  Fix.n7744,      Fix.n12544_neg
-                FVectorHalf Fix.n512_neg,   Fix.n2048,      Fix.n12544
-                FVectorHalf Fix.n512_neg,   Fix.n2048_neg,  Fix.n12544
-                FVectorHalf Fix.n512,       Fix.n2048,      Fix.n12544
-                FVectorHalf Fix.n512,       Fix.n2048_neg,  Fix.n12544
+                FVertex Fix.n0,         Fix.n9600,      Fix.n12544
+                FVertex Fix.n9152,      Fix.n2944,      Fix.n12544
+                FVertex Fix.n5632,      Fix.n7744_neg,  Fix.n12544
+                FVertex Fix.n5632_neg,  Fix.n7744_neg,  Fix.n12544
+                FVertex Fix.n9152_neg,  Fix.n2944,      Fix.n12544
+                FVertex Fix.n0,         Fix.n15552,     Fix.n2944
+                FVertex Fix.n14784,     Fix.n4800,      Fix.n2944
+                FVertex Fix.n9152,      Fix.n12544_neg, Fix.n2944
+                FVertex Fix.n9152_neg,  Fix.n12544_neg, Fix.n2944
+                FVertex Fix.n14784_neg, Fix.n4800,      Fix.n2944
+                FVertex Fix.n9152,      Fix.n12544,     Fix.n2944_neg
+                FVertex Fix.n14784,     Fix.n4800_neg,  Fix.n2944_neg
+                FVertex Fix.n0,         Fix.n15552_neg, Fix.n2944_neg
+                FVertex Fix.n14784_neg, Fix.n4800_neg,  Fix.n2944_neg
+                FVertex Fix.n9152_neg,  Fix.n12544,     Fix.n2944_neg
+                FVertex Fix.n5632,      Fix.n7744,      Fix.n12544_neg
+                FVertex Fix.n9152,      Fix.n2944_neg,  Fix.n12544_neg
+                FVertex Fix.n0,         Fix.n9600_neg,  Fix.n12544_neg
+                FVertex Fix.n9152_neg,  Fix.n2944_neg,  Fix.n12544_neg
+                FVertex Fix.n5632_neg,  Fix.n7744,      Fix.n12544_neg
+                FVertex Fix.n512_neg,   Fix.n2048,      Fix.n12544
+                FVertex Fix.n512_neg,   Fix.n2048_neg,  Fix.n12544
+                FVertex Fix.n512,       Fix.n2048,      Fix.n12544
+                FVertex Fix.n512,       Fix.n2048_neg,  Fix.n12544
 .VertexNum      EQU ($-.Vertexes) / 6
 
 .Normals:       EQU $

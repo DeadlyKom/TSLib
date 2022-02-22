@@ -6,6 +6,8 @@
 
                 include "RotateVector.asm"
                 include "RotateLocation.asm"
+                include "MultiplyMatrixByVector.asm"
+                include "PerspectiveProjection.asm"
 
                 endmodule
 

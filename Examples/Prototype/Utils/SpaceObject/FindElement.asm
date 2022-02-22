@@ -11,7 +11,7 @@
 ; Note:
 ; -----------------------------------------
 FindFree:       LD HL, Game.CelestialObject.Array
-                LD DE, FCelestialNode
+                LD DE, FSpaceObject
                 LD B, MAX_OBJECT
 
 .Loop           LD A, (HL)

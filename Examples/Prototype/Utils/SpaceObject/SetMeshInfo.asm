@@ -37,6 +37,6 @@ SetMeshInfo:    ; установка значений
 
                 RET
 
-                include "../../../Data/Tables/Meshes.inc"
+                include "../../Data/Tables/Meshes.inc"
 
                 endif ; ~_GAME_CELESTIAL_OBJECT_UTILS_SET_MESH_INFO_

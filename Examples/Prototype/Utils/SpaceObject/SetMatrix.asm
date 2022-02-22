@@ -39,28 +39,28 @@ SetMatrix:      RET
                 LD DE, #0000
                 LD BC, #0000
 
-.SetRow_M0      LD (IX + FMatrix.M0.X.L), L
-                LD (IX + FMatrix.M0.X.H), H
-                LD (IX + FMatrix.M0.Y.L), E
-                LD (IX + FMatrix.M0.Y.H), D
-                LD (IX + FMatrix.M0.Z.L), C
-                LD (IX + FMatrix.M0.Z.H), B
+.SetRow_M0      LD (IX + FMatrix.MV0.X.L), L
+                LD (IX + FMatrix.MV0.X.H), H
+                LD (IX + FMatrix.MV0.Y.L), E
+                LD (IX + FMatrix.MV0.Y.H), D
+                LD (IX + FMatrix.MV0.Z.L), C
+                LD (IX + FMatrix.MV0.Z.H), B
                 RET
 
-.SetRow_M1      LD (IX + FMatrix.M1.X.L), L
-                LD (IX + FMatrix.M1.X.H), H
-                LD (IX + FMatrix.M1.Y.L), E
-                LD (IX + FMatrix.M1.Y.H), D
-                LD (IX + FMatrix.M1.Z.L), C
-                LD (IX + FMatrix.M1.Z.H), B
+.SetRow_M1      LD (IX + FMatrix.MV1.X.L), L
+                LD (IX + FMatrix.MV1.X.H), H
+                LD (IX + FMatrix.MV1.Y.L), E
+                LD (IX + FMatrix.MV1.Y.H), D
+                LD (IX + FMatrix.MV1.Z.L), C
+                LD (IX + FMatrix.MV1.Z.H), B
                 RET
 
-.SetRow_M2      LD (IX + FMatrix.M2.X.L), L
-                LD (IX + FMatrix.M2.X.H), H
-                LD (IX + FMatrix.M2.Y.L), E
-                LD (IX + FMatrix.M2.Y.H), D
-                LD (IX + FMatrix.M2.Z.L), C
-                LD (IX + FMatrix.M2.Z.H), B
+.SetRow_M2      LD (IX + FMatrix.MV2.X.L), L
+                LD (IX + FMatrix.MV2.X.H), H
+                LD (IX + FMatrix.MV2.Y.L), E
+                LD (IX + FMatrix.MV2.Y.H), D
+                LD (IX + FMatrix.MV2.Z.L), C
+                LD (IX + FMatrix.MV2.Z.H), B
                 RET
 
                 endif ; ~_GAME_CELESTIAL_OBJECT_UTILS_SET_MATRIX_

@@ -5,9 +5,9 @@
                 define ZERO_POSITION {   0,   0,   0 }
 
                 struct FPosition
-X               DW #00                                                          ; FFixed1814
-Y               DW #00                                                          ; FFixed1814
-Z               DW #00                                                          ; FFixed1814
+X               DW #0000                                                        ; FFixed1814
+Y               DW #0000                                                        ; FFixed1814
+Z               DW #0000                                                        ; FFixed1814
 
                 ends
 

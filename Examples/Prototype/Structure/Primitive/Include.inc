@@ -1,11 +1,13 @@
 
                 ifndef _STRUCTURE_PRIMITIVE_INCLUDE_
                 define _STRUCTURE_PRIMITIVE_INCLUDE_
-PRIM_POINTS     EQU #01 | #80
-PRIM_LINES      EQU #02 | #80
-PRIM_TIANGLES   EQU #03 | #80
-PRIM_QUADS      EQU #04 | #80
-PRIM_POLYGON    EQU #05 | #80
+PRIMITIVE_BIT   EQU 0x07                                                        ; флаг пренодлежности примитива
+PRIMITIVE       EQU 1 << PRIMITIVE_BIT
+PRIM_POINTS     EQU #00 | PRIMITIVE
+PRIM_LINES      EQU #01 | PRIMITIVE
+PRIM_TIANGLES   EQU #02 | PRIMITIVE
+PRIM_QUADS      EQU #03 | PRIMITIVE
+PRIM_POLYGON    EQU #04 | PRIMITIVE
 PRIM_END        EQU #FF
 
                 include "Point.inc"

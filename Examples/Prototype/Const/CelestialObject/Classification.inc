@@ -6,6 +6,7 @@ NO_LOCATION_BIT EQU 0x07                                                        
 PHYSICAL_BIT    EQU 0x06                                                        ; объект физический
 NO_LOCATION     EQU 1 << NO_LOCATION_BIT
 PHYSICAL        EQU 1 << PHYSICAL_BIT
+FLAGS_MASK      EQU NO_LOCATION | PHYSICAL
 
                 module Classification
 

@@ -9,8 +9,9 @@
 ; Corrupt:
 ;   HL, DE, AF, AF'
 ; Note:
-;   define CARRY_FLOW_WARNING - calling the overflow error display function 'OVER_COL_WARNING'
-;   define OVERFLOW           - reflect overflow result in carry flag
+;   define FIXED_CHECK_OVERFLOW - adds an overflow check
+;   define CARRY_FLOW_WARNING   - calling the overflow error display function 'OVER_COL_WARNING'
+;   define OVERFLOW             - reflect overflow result in carry flag
 ; -----------------------------------------
 SUB:            ; definition of subtraction/addition operation
                 LD A, H

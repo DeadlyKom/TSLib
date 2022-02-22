@@ -1,6 +1,6 @@
 
-                ifndef _GAME_CELESTIAL_OBJECT_MATH_ROTATE_LOCATION_
-                define _GAME_CELESTIAL_OBJECT_MATH_ROTATE_LOCATION_
+                ifndef _GAME_MATH_ROTATE_LOCATION_
+                define _GAME_MATH_ROTATE_LOCATION_
 ; -----------------------------------------
 ; вращение точки относительно центра системы координат
 ; In :
@@ -29,8 +29,8 @@ RotateLocation: ; ---------------------------------------------
                 EXX
                 LD L, (IX + FVector.X.H.L)
                 LD H, (IX + FVector.X.H.H)
-                LD E, (IX + FRotator.Roll.L)
-                LD D, (IX + FRotator.Roll.H)
+                LD E, (IY + FRotator.Roll.L)
+                LD D, (IY + FRotator.Roll.H)
                 PUSH DE                                                         ; сохранение roll
 
                 CALL Math.Fixed_1814.MULS
@@ -57,8 +57,8 @@ RotateLocation: ; ---------------------------------------------
                 ; ---------------------------------------------
 
                 ; HLHL' = pitch * K2
-                LD E, (IX + FRotator.Pitch.L)
-                LD D, (IX + FRotator.Pitch.H)
+                LD E, (IY + FRotator.Pitch.L)
+                LD D, (IY + FRotator.Pitch.H)
                 PUSH DE                                                         ; сохранение pitch
                 CALL Math.Fixed_1814.MULS
 
@@ -131,4 +131,4 @@ RotateLocation: ; ---------------------------------------------
 .E              ; ---------------------------------------------
                 RET
 
-                endif ; ~_GAME_CELESTIAL_OBJECT_MATH_ROTATE_LOCATION_
+                endif ; ~_GAME_MATH_ROTATE_LOCATION_

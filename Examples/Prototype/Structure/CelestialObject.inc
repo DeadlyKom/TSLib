@@ -2,7 +2,7 @@
                 ifndef _STRUCTURE_CELESTIAL_OBJECT_INCLUDE_
                 define _STRUCTURE_CELESTIAL_OBJECT_INCLUDE_
 
-                struct FCelestialNode
+                struct FSpaceObject
 Classification  DB #00                                                          ; тип объекта
 Location        FVector                                                         ; расположение объекта в пространстве 18:14
 MatrixRot       FMatrix                                                         ; матрица вращения объекта

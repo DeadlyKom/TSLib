@@ -17,7 +17,7 @@ StartGame:
                 EX AF, AF'
                 LD A, Classification.Skybox
                 LD B, Index.Skybox
-                CALL Game.CelestialObject.Utils.SetObject
+                CALL Utils.SetObject
 
                 RET
 

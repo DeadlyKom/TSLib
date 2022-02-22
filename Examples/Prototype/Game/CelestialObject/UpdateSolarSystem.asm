@@ -14,12 +14,12 @@ UpdateSolSys:   ; инициализация
                 LD (.Count), A
 
 .Loop           ; проверим тип объекта
-                LD A, (IX + FCelestialNode.Classification)
+                LD A, (IX + FSpaceObject.Classification)
                 OR A
                 CALL NZ, UpdateObject                                           ; обновим объект, если тип известен
 
 .Next           ; переход к следующему элементу массива
-                LD BC, FCelestialNode
+                LD BC, FSpaceObject
                 ADD IX, BC
 
                 ; уменьшит счёткик обрабатываемых объектов

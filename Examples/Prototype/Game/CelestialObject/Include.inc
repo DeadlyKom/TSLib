@@ -4,16 +4,14 @@
 
                 module CelestialObject
 
-                include "Math/Include.inc"
+                include "Draw/Include.inc"
                 include "UpdateSolarSystem.asm"
                 include "UpdateCelestialObject.asm"
-                include "DrawCelestialObject.asm"
-
-                include "Utils/Include.inc"
+                include "DrawCelestialObjects.asm"
 
                 ; массив обрабатываемых объектов в космосе
-Array:          FCelestialNode = $
-                DS FCelestialNode * MAX_OBJECT
+Array:          FSpaceObject = $
+                DS FSpaceObject * MAX_OBJECT
 .Size           DB #00                                                          ; размер массива
 
                 endmodule

@@ -18,6 +18,7 @@
                 include "ADD.asm"
                 include "SUB.asm"
                 include "MUL.asm"
+                include "SL.asm"
                 include "Overflow.asm"
 
                 endmodule

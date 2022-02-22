@@ -1,6 +1,6 @@
 
-                ifndef _GAME_CELESTIAL_OBJECT_MATH_ROTATE_VECTOR_
-                define _GAME_CELESTIAL_OBJECT_MATH_ROTATE_VECTOR_
+                ifndef _GAME_MATH_ROTATE_VECTOR_
+                define _GAME_MATH_ROTATE_VECTOR_
 ; -----------------------------------------
 ; roll вращение вектора относительно центра системы координат
 ; In :
@@ -22,10 +22,10 @@ RotateRoll:     ; ---------------------------------------------
                 ; HL = roll * x
                 LD C, (IX + FVectorHalf.X.L)
                 LD B, (IX + FVectorHalf.X.H)
-                PUSH BC                                                         ; сохраним x
-                LD E, (IX + FRotator.Roll.L)
-                LD D, (IX + FRotator.Roll.H)
-                PUSH DE                                                         ; сохраними roll
+                PUSH BC                                                         ; сохранение x
+                LD E, (IY + FRotator.Roll.L)
+                LD D, (IY + FRotator.Roll.H)
+                PUSH DE                                                         ; сохранение roll
                 CALL Math.Fixed_214.MULS
 
                 ; HL = y - roll * x
@@ -43,12 +43,12 @@ RotateRoll:     ; ---------------------------------------------
                 ; ---------------------------------------------
 
                 ; HL = roll * y
-                POP BC                                                          ; востановим roll
+                POP BC                                                          ; востановление roll
                 EX DE, HL
                 CALL Math.Fixed_214.MULS
 
                 ; HL = x + roll * y
-                POP DE                                                          ; востановим x
+                POP DE                                                          ; востановление x
                 CALL Math.Fixed_214.ADD
 
                 ; сохранение результата -> x = x + roll * y
@@ -78,10 +78,10 @@ RotatePitch:    ; ---------------------------------------------
                 ; HL = pitch * z
                 LD C, (IX + FVectorHalf.Z.L)
                 LD B, (IX + FVectorHalf.Z.H)
-                PUSH BC                                                         ; сохраним z
-                LD E, (IX + FRotator.Pitch.L)
-                LD D, (IX + FRotator.Pitch.H)
-                PUSH DE                                                         ; сохраними pitch
+                PUSH BC                                                         ; сохранение z
+                LD E, (IY + FRotator.Pitch.L)
+                LD D, (IY + FRotator.Pitch.H)
+                PUSH DE                                                         ; сохранение pitch
                 CALL Math.Fixed_214.MULS
 
                 ; HL = y - pitch * z
@@ -99,12 +99,12 @@ RotatePitch:    ; ---------------------------------------------
                 ; ---------------------------------------------
 
                 ; HL = pitch * y
-                POP BC                                                          ; востановим pitch
+                POP BC                                                          ; востановление pitch
                 EX DE, HL
                 CALL Math.Fixed_214.MULS
 
                 ; HL = z + pitch * y
-                POP DE                                                          ; востановим z
+                POP DE                                                          ; востановление z
                 CALL Math.Fixed_214.ADD
 
                 ; сохранение результата -> z = z + pitch * y
@@ -113,4 +113,4 @@ RotatePitch:    ; ---------------------------------------------
 
                 RET
 
-                endif ; ~_GAME_CELESTIAL_OBJECT_MATH_ROTATE_VECTOR_
+                endif ; ~_GAME_MATH_ROTATE_VECTOR_

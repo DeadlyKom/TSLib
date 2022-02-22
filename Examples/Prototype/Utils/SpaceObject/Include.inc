@@ -1,8 +1,6 @@
 
-                ifndef _GAME_CELESTIAL_OBJECT_UTILS_INCLUDE_
-                define _GAME_CELESTIAL_OBJECT_UTILS_INCLUDE_
-
-                module Utils
+                ifndef _GAME_CELESTIAL_OBJECT_UTILS_SPACE_OBJECT_ARRAY_INCLUDE_
+                define _GAME_CELESTIAL_OBJECT_UTILS_SPACE_OBJECT_ARRAY_INCLUDE_
 
                 include "FindElement.asm"
                 include "SetLocation.asm"
@@ -14,6 +12,4 @@
                 include "SetMeshInfo.asm"
                 include "AddObject.asm"
 
-                endmodule
-
-                endif ; ~_GAME_CELESTIAL_OBJECT_UTILS_INCLUDE_
+                endif ; ~_GAME_CELESTIAL_OBJECT_UTILS_SPACE_OBJECT_ARRAY_INCLUDE_
