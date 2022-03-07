@@ -4,12 +4,11 @@
 
                 ORG EntryPoint
 PROTOTYPE_Start:
-                
-                include "Math/Include.inc"
-                include "Utils/Include.inc"
-                
                 include "Core/Include.inc"
                 include "Game/Include.inc"
+
+                include "Math/Include.inc"
+                include "Utils/Include.inc"
 PROTOTYPE_End:
 PROTOTYPE_Size: EQU PROTOTYPE_End - PROTOTYPE_Start
 

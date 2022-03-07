@@ -9,6 +9,7 @@
 ; Corrupt:
 ;   HL, DE, AF, AF'
 ; Note:
+;   define FIXED_CHECK_OVERFLOW - adds an overflow check
 ;   define CARRY_FLOW_WARNING - calling the overflow error display function 'OVER_COL_WARNING'
 ;   define OVERFLOW           - reflect overflow result in carry flag
 ; -----------------------------------------
@@ -45,7 +46,7 @@ ADDP:           ; addition operation
                 ifdef FIXED_CHECK_OVERFLOW
                 ; check for overflow
                 BIT 7, H
-                JR NZ, MaxOverflow
+                JP NZ, MaxOverflow
                 endif
 
                 ; set the resulting sign

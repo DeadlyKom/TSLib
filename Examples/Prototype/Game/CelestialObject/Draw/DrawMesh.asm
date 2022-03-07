@@ -44,8 +44,10 @@ Mesh:
                 JP (HL)
 
 .Next           ;
+                JR .Loop
 
-.RET            RET
+.RET            POP HL
+                RET
 
 .JumpTable      DW #0000                                                        ; PRIM_POINTS
                 DW #0000                                                        ; PRIM_LINES

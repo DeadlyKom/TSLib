@@ -11,6 +11,7 @@
 ; Note:
 ; -----------------------------------------
 UpdateObject:   ; инициализация
+                INC IX
                 LD IY, Game.Init.Player.Ship.FlightRot
 
                 ; проверка на объекты в центре

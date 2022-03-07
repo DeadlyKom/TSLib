@@ -14,18 +14,19 @@
 ;   define CARRY_FLOW_WARNING   - calling the overflow error display function 'OVER_COL_WARNING'
 ;   define OVERFLOW             - reflect overflow result in carry flag
 ; -----------------------------------------
-SL:             ; check register B is not zero
-                INC B
-                DEC B
-                RET Z
-
+SL:             LD DE, #0000
+                
                 LD A, H
                 EX AF, AF'                                                      ; save 7 bits for resulting sign
-                RES 7, H
+                RES 7, H                                                        ; reset sign of number
+
+                ; check register B is not zero
+                INC B
+                DEC B
+                JR Z, .Set
                 
                 ; shift
 .Loop           ADD HL, HL
-                JR NC, .NextShift
                 EX DE, HL
                 ADC HL, HL
 
@@ -36,6 +37,7 @@ SL:             ; check register B is not zero
 
                 EX DE, HL
 .NextShift      DJNZ .Loop
+.Set            EX DE, HL
 
                 EX AF, AF'                                                      ; restore 7 bits for resulting sign
                 RLA

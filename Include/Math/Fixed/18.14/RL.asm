@@ -1,5 +1,5 @@
-                ifndef _FIXED_2_14_SHIFT_LEFT_
-                define _FIXED_2_14_SHIFT_LEFT_
+                ifndef _FIXED_18_14_SHIFT_LEFT_
+                define _FIXED_18_14_SHIFT_LEFT_
 ; -----------------------------------------
 ; shift right fixed-point numbers 18:14
 ; In:
@@ -33,4 +33,4 @@ SL:             ; check register B is not zero
                 SET 7, H
                 RET
 
-                endif ; ~_FIXED_2_14_SHIFT_LEFT_
+                endif ; ~_FIXED_18_14_SHIFT_LEFT_

@@ -14,8 +14,9 @@ InterruptVA_Frame   EQU InterruptVA + INT_VEC_FRAME                             
 InterruptVA_Line    EQU InterruptVA + INT_VEC_LINE                              ; адрес строчного вектора прерываний
 InterruptVA_DMA     EQU InterruptVA + INT_VEC_DMA                               ; адрес DMA вектора прерываний
 
-TSLib               EQU #1000                                                   ; адрес библиотеки TS-Conf
 TSLibPage           EQU #00                                                     ; страница в которой хранятся библиотека TS-Conf
+TSLib               EQU #1000                                                   ; адрес библиотеки TS-Conf
+CmdAddress          EQU #3000                                                   ; адрес буфера для сопроцессора FT812
 
 BUILD_Mesh          EQU #C000                                                   ; адрес мешей
 BUILD_MeshPage      EQU #FF                                                     ; страница в которой хранятся меши

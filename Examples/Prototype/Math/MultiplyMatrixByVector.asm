@@ -129,7 +129,7 @@ MatrixByVectorT:
 .Y              ; Y = (V.x * MV[0].y) + (V.y * MV[1].y) + (V.z * MV[2].y)
                 ; ---------------------------------------------
 .Vz_MV2_2y      EQU $+1
-                LD DE, #0000
+                LD HL, #0000
 .Vy_MV_1y       EQU $+1
                 LD DE, #0000
                 CALL Math.Fixed_214.ADD
@@ -142,7 +142,7 @@ MatrixByVectorT:
 .X              ; X = (V.x * MV[0].x) + (V.y * MV[1].x) + (V.z * MV[2].x)
                 ; ---------------------------------------------
 .Vz_MV2_2x      EQU $+1
-                LD DE, #0000
+                LD HL, #0000
 .Vy_MV_1x       EQU $+1
                 LD DE, #0000
                 CALL Math.Fixed_214.ADD

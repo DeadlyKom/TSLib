@@ -8,6 +8,8 @@
                 include "RotateLocation.asm"
                 include "MultiplyMatrixByVector.asm"
                 include "PerspectiveProjection.asm"
+                include "TransformVertex.asm"
+                include "CrossProduct2D.asm"
 
                 endmodule
 

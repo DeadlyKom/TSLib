@@ -7,6 +7,7 @@ TSLIB_Start:
                 include "../../Include/TSLib.inc"
                 include "../../Include/Math/Fixed/Include.inc"
                 include "../../Include/Math/Mul/uint16x16_32.asm"
+                include "../../Include/Math/Div/uint32x16_32.asm"
 TSLIB_End:
 TSLIB_Size:     EQU TSLIB_End - TSLIB_Start
 

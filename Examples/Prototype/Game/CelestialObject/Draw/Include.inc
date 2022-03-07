@@ -6,6 +6,7 @@
 
                 include "DrawMesh.asm"
                 include "PrimitiveQuad.asm"
+                include "AddPolygonToDL.asm"
 
                 endmodule
 

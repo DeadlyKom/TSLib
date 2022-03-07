@@ -40,7 +40,7 @@ Draw:           ; инициализация
                 LD (Utils.Mesh.Primitive.LocationPtr), HL                       ; HL = FSpaceObject.Location
 
                 ; установка адреса матрицы вращения
-                LD BC, FSpaceObject.Location
+                LD BC, FSpaceObject.MatrixRot - FSpaceObject.Location
                 ADD HL, BC
                 LD (Utils.Mesh.Primitive.MatrixPtr), HL                         ; HL = FSpaceObject.MatrixRot
 

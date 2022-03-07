@@ -22,7 +22,7 @@ SUB:            ; definition of subtraction/addition operation
                 ; reset signs of two numbers
                 RES 7, H                                                        ; reset sign lvalue
                 RES 7, D                                                        ; reset sign rvalue
-                JP P, ADDP                                                      ; jump if sign flag is reset, it's addition operation
+                JP M, ADDP                                                      ; jump if sign flag is reset, it's addition operation
 
 ; -----------------------------------------
 ; subtraction two fixed-point numbers 18:14 with the same signs
@@ -45,42 +45,36 @@ SUBP            ; subtraction operation
                 EXX
                 OR A                                                            ; needed if direct calls to this function are used
                 SBC HL, DE
-                PUSH HL
                 EXX
                 SBC HL, DE
-                POP DE
 
                 ; check for overflow
                 JR NC, .SetSign
 
-                EX DE, HL                                                       ; swap high value to low value
-  
-                ; negate low value
-                LD A, L
-                CPL
-                LD L, A
-                LD A, H
-                CPL
-                LD H, A
-                LD BC, #00001
-                ADD HL, BC
+                EXX                                                             ; swap high value to low value
 
-                EX DE, HL                                                       ; swap low value to high value
-
-                ; negate high value
-                LD A, L
-                CPL
+                ; NEG HL
+                XOR A
+                SUB L
                 LD L, A
-                LD A, H
-                CPL
+                SBC A, A
+                SUB H
                 LD H, A
-                DEC C
-                ADC HL, BC
+
+                EXX                                                             ; swap low value to high value
+
+                ; NEG HL
+                LD A, #00
+                SBC A, L
+                LD L, A
+                SBC A, A
+                SUB H
+                LD H, A
 
                 ifdef FIXED_CHECK_OVERFLOW
                 ; check for overflow
                 BIT 7, H
-                JR NZ, MinOverflow
+                JP NZ, MinOverflow
                 endif
 
                 ; change sign to opposite

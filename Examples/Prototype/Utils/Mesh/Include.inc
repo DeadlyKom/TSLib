@@ -5,6 +5,7 @@
                 module Mesh
 
                 include "ReadFace.asm"
+                include "NextFace.asm"
                 include "GetVertexAddress.asm"
 Primitive:
 .MatrixPtr      DW #0000
@@ -17,10 +18,10 @@ Primitive:
 .Queue          DB #00
 .Normal         DB #00
 ; .Color          FColor
-; .VertexA        FVector2D
-; .VertexB        FVector2D
-; .VertexC        FVector2D
-; .VertexD        FVector2D
+.VertexA        FVector2D
+.VertexB        FVector2D
+.VertexC        FVector2D
+.VertexD        FVector2D
 ; .VertexE        FVector2D
 .Tmp            DB #00
 

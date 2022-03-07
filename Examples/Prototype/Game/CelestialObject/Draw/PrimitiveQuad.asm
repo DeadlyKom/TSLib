@@ -6,14 +6,16 @@
 ; In :
 ;   BC   - указывает на FMesh.IndexBuffer
 ;   A'   - значение FSpaceObject.Classification
-;   SP-2 - матрица вращение
-;   SP-4 - положение объекта
 ; Out :
 ; Corrupt :
 ; Note:
 ; -----------------------------------------
 Quad:           ; чтение FFace
                 CALL Utils.Mesh.ReadFace
+
+                ; ---------------------------------------------
+.Transform_A    ; реобразование вершины A
+                ; ---------------------------------------------
 
                 ; чтение индексы вершин
                 LD A, (BC)
@@ -22,69 +24,85 @@ Quad:           ; чтение FFace
                 ; расчёт адреса 
                 CALL Utils.Mesh.GetVertex
 
-                ; 
+                ; применение
                 PUSH HL
                 EXX
                 POP IY
+                CALL Math.TransformVertex
+                LD (Utils.Mesh.Primitive.VertexA.X), HL                         ; HL - A.x
+                LD (Utils.Mesh.Primitive.VertexA.Y), DE                         ; DE - A.y
+                EXX
 
                 ; ---------------------------------------------
-.Rotate         ; вращение вершины
+.Transform_B    ; реобразование вершины B
                 ; ---------------------------------------------
 
-                ; востановление значения адреса матрицы вращения
-                LD IX, (Utils.Mesh.Primitive.MatrixPtr)
-                CALL Math.MatrixByVectorT
+                ; чтение индексы вершин
+                LD A, (BC)
+                INC BC
+
+                ; расчёт адреса 
+                CALL Utils.Mesh.GetVertex
+
+                ; применение
+                PUSH HL
+                EXX
+                POP IY
+                CALL Math.TransformVertex
+                LD (Utils.Mesh.Primitive.VertexB.X), HL                         ; HL - B.x
+                LD (Utils.Mesh.Primitive.VertexB.Y), DE                         ; DE - B.y
+                EXX
 
                 ; ---------------------------------------------
-.Scale          ; применение маштабирования
+.Transform_C    ; реобразование вершины C
                 ; ---------------------------------------------
 
-                PUSH BC                                                         ; сохранение значения Z fixed-point 2.14
-                PUSH DE                                                         ; сохранение значения Y fixed-point 2.14
+                ; чтение индексы вершин
+                LD A, (BC)
+                INC BC
 
-                LD A, (Utils.Mesh.Primitive.Scale)
-                LD C, A
+                ; расчёт адреса 
+                CALL Utils.Mesh.GetVertex
 
-                ; значение X
-                LD B, A
-                CALL Math.Fixed_214.SL
-                LD (Utils.Mesh.Primitive.Location.X.L), DE
-                LD (Utils.Mesh.Primitive.Location.X.H), HL
-
-                ; значение Y
-                LD B, C
-                POP HL                                                          ; востановление значения Y fixed-point 2.14
-                CALL Math.Fixed_214.SL
-                LD (Utils.Mesh.Primitive.Location.Y.L), DE
-                LD (Utils.Mesh.Primitive.Location.Y.H), HL
-
-                ; значение Z
-                LD B, C
-                POP HL                                                          ; востановление значения Z fixed-point 2.14
-                CALL Math.Fixed_214.SL
-                LD (Utils.Mesh.Primitive.Location.Z.L), DE
-                LD (Utils.Mesh.Primitive.Location.Z.H), HL
+                ; применение
+                PUSH HL
+                EXX
+                POP IY
+                CALL Math.TransformVertex
+                LD (Utils.Mesh.Primitive.VertexC.X), HL                         ; HL - C.x
+                LD (Utils.Mesh.Primitive.VertexC.Y), DE                         ; DE - C.y
 
                 ; ---------------------------------------------
-.Offset         ; смещение вершины
+.CrossProduct   ; проверка видимости полигона
                 ; ---------------------------------------------
 
-                ; проверкак добавления смещения
-                LD A, (Utils.Mesh.Primitive.Flags)
-                BIT NO_LOCATION_BIT, A
-                JR Z, .SkipLocation
-
-                ; востановление значения адреса положения объекта
-                LD IX, (Utils.Mesh.Primitive.LocationPtr)
-
-.SkipLocation   ; метка пропуска смещения
+                CALL Math.CrossProduct2D
+                EXX
+                ; JP M, Utils.Mesh.NextFace                                       ; результат отрицательный (примитив не видим)
+                INC BC
 
                 ; ---------------------------------------------
-                ; 
+.Transform_D    ; реобразование вершины D
                 ; ---------------------------------------------
 
-                CALL Math.PerspectiveProj
+                ; чтение индексы вершин
+                LD A, (BC)
+                INC BC
 
+                ; расчёт адреса 
+                CALL Utils.Mesh.GetVertex
+
+                ; применение
+                PUSH HL
+                EXX
+                POP IY
+                CALL Math.TransformVertex
+                LD (Utils.Mesh.Primitive.VertexD.X), HL                         ; HL - D.x
+                LD (Utils.Mesh.Primitive.VertexD.Y), DE                         ; DE - D.y
+
+                CALL AddPolygonToDL
+
+                EXX
                 RET
 
                 endif ; ~_GAME_CELESTIAL_OBJECT_DRAW_MESH_PRIMITIVE_QUAD_

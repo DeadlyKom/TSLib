@@ -22,7 +22,7 @@ SUB:            ; definition of subtraction/addition operation
                 ; reset signs of two numbers
                 RES 7, H
                 RES 7, D
-                JP P, ADDP                                                      ; jump if sign flag is reset, it's addition operation
+                JP M, ADDP                                                      ; jump if sign flag is reset, it's addition operation
 
 ; -----------------------------------------
 ; subtraction two fixed-point numbers 2:14 with the same signs
@@ -47,14 +47,13 @@ SUBP            ; subtraction operation
                 ; check for overflow
                 JR NC, .SetSign
 
-                ; negate value
-                LD A, L
-                CPL
+                ; NEG HL
+                XOR A
+                SUB L
                 LD L, A
-                LD A, H
-                CPL
+                SBC A, A
+                SUB H
                 LD H, A
-                INC HL
 
                 ifdef FIXED_CHECK_OVERFLOW
                 ; check for overflow

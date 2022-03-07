@@ -5,6 +5,7 @@
                 include "Fixed 2.14.inc"
                 include "Fixed 18.14.inc"
 
+                include "Vector2D.inc"
                 include "Vector.inc"
                 include "VectorHalf.inc"
                 include "Rotator.inc"

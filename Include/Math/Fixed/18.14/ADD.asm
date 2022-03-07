@@ -44,15 +44,13 @@ ADD:            ; definition of subtraction/addition operation
 ADDP:           ; addition operation
                 EXX
                 ADD HL, DE
-                PUSH HL
                 EXX
                 ADC HL, DE
-                POP DE
 
                 ifdef FIXED_CHECK_OVERFLOW
                 ; check for overflow
                 BIT 7, H
-                JR NZ, MaxOverflow
+                JP NZ, MaxOverflow
                 endif
 
                 ; set the resulting sign

@@ -20,11 +20,11 @@ SetMatrix:      RET
 ; Note:
 ;   M0 - RightVector   FVector( 1,  0,  0)
 ;   M1 - UpVector      FVector( 0,  1,  0)
-;   M2 - ForwardVector FVrctor(-0, -0, -1)
+;   M2 - ForwardVector FVector( 0,  0, -1)
 ; -----------------------------------------
 .Identity       ; установка строки M2
-                LD HL, #8000
-                LD DE, #8000
+                LD HL, #0000
+                LD DE, #0000
                 LD BC, #C000
                 CALL .SetRow_M2
 

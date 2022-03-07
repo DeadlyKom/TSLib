@@ -3,7 +3,7 @@
                 define _STRUCTURE_PLAYER_SHIP_INCLUDE_
 
                 struct FShip
-FlightRot       FRotator
+FlightRot       FRotator {0x00, 0x01}, {0x00, 0x01}, {0x00, 0x00}
 Speed           DW #0000
 
                 ends

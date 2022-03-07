@@ -8,7 +8,7 @@ PRIM_LINES      EQU #01 | PRIMITIVE
 PRIM_TIANGLES   EQU #02 | PRIMITIVE
 PRIM_QUADS      EQU #03 | PRIMITIVE
 PRIM_POLYGON    EQU #04 | PRIMITIVE
-PRIM_END        EQU #FF
+PRIM_END        EQU #05
 
                 include "Point.inc"
                 include "Line.inc"

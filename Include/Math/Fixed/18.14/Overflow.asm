@@ -6,7 +6,7 @@ MinOverflow:    ; set the minimum negative value available
                 LD HL, (FIXED_1814_MIN_N >> 16) & 0xFFFF
                 LD BC, (FIXED_1814_MIN_N >>  0) & 0xFFFF
                 ifdef COLOR_FLOW_WARNING
-                CALL OVER_COL_WARNING
+                CALL Warning.OverflowColor
                 endif
                 ifdef CARRY_FLOW_WARNING
                 SCF                                                             ; set carry, it's error
@@ -16,7 +16,7 @@ MaxOverflow:    ; set maximum available value
                 LD HL, (FIXED_1814_MAX_P >> 16) & 0xFFFF
                 LD BC, (FIXED_1814_MAX_P >>  0) & 0xFFFF
                 ifdef COLOR_FLOW_WARNING
-                CALL OVER_COL_WARNING
+                CALL Warning.OverflowColor
                 endif
                 ifdef CARRY_FLOW_WARNING
                 SCF                                                             ; set carry, it's error
