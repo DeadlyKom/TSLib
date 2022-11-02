@@ -4,7 +4,7 @@
 
                 module Math
 ; -----------------------------------------
-; integer multiplies DE by A
+; integer multiplies H by E
 ; In :
 ;   H - multiplicand
 ;   E  - multiplier
@@ -13,19 +13,24 @@
 ; Corrupt :
 ;   HL, D, F
 ; Note:
-;   http://z80-heaven.wikidot.com/math#toc1
+;   http://map.grauw.nl/sources/external/z80bits.html#1.1
 ; -----------------------------------------
 MulInt8x8_16:   LD D, #00
                 LD L, D
+                SLA H
+                JR NC, $+3
+                LD L, E
 
                 ; unroll
-                rept 8
+                rept 7
                 ADD HL, HL
                 JR NC, $+3
                 ADD HL, DE
                 endr
 
                 RET
+
+                display " - Multiply 8x8 : \t\t\t", /A, Mul8x8_16, " = busy [ ", /D, $ - Mul8x8_16, " bytes  ]"
 
                 endmodule
 
