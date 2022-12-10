@@ -32,6 +32,7 @@ Links:
 - [Utils](https://brtchip.com/eve-toolchains/#ESD4) ENG
 - [Image File Conversion](https://www.ftdichip.com/Support/Documents/AppNotes/AN_303%20FT800%20Image%20File%20Conversion.pdf) ENG
 - [FT81X Simple PIC Library Examples](https://brtchip.com/wp-content/uploads/Support/Documentation/Application_Notes/ICs/EVE/BRT_AN_014_FT81X_Simple_PIC_Library_Examples.pdf) ENG
+- [Git links](https://github.com/topics/ft81x) ENG
 - [The Gameduino 2 Tutorial, Reference and Cookbook](https://trello.com/c/DSUEa9z7/23-ft812) ENG
 - [Floating-point library for Z80](https://github.com/DW0RKiN/Floating-point-Library-for-Z80#binary16-half) ENG
 ---

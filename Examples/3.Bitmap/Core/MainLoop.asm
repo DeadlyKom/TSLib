@@ -44,12 +44,11 @@ MainLoop:       ; maybe some code
 
                 FT_Display
                 FT_CMD_Swap
-                FT_CMD_Interrupt 0
                 FT_CMD_Write
                 
-.WaitIntSwap    ; wait, swap display list (wait interrupt delay 'FT_CMD_Interrupt 0')
+.WaitIntSwap    ; wait, swap display list
                 FT_RD_REG8 FT_REG_INT_FLAGS
-                AND FT_INT_CMDFLAG
+                AND FT_INT_SWAP
                 JR Z, .WaitIntSwap
 
                 ; CALL FT.Coprocessor.Wait
