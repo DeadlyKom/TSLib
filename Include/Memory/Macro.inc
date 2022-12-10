@@ -83,6 +83,22 @@ SetPage0_A      macro
                 endif
                 endm
 ; -----------------------------------------
+; get the page number from the address #0000 - #3FFF
+; In :
+; Out :
+;   A - page number
+; Corrupt :
+;   A
+; Note:
+; -----------------------------------------
+GetPage0        macro
+                ifdef MAPPING_REGISTERS
+                LD A, (FMADDR_REGS + HIGH PAGE0)
+                else
+                LD A, (MemoryPages + 0)
+                endif
+                endm
+; -----------------------------------------
 ; set the page number from the address #4000 - #7FFF
 ; In :
 ;   Page? - page number
@@ -121,6 +137,22 @@ SetPage1_A      macro
                 endif
                 endm
 ; -----------------------------------------
+; get the page number from the address #4000 - #7FFF
+; In :
+; Out :
+;   A - page number
+; Corrupt :
+;   A
+; Note:
+; -----------------------------------------
+GetPage1        macro
+                ifdef MAPPING_REGISTERS
+                LD A, (FMADDR_REGS + HIGH PAGE1)
+                else
+                LD A, (MemoryPages + 1)
+                endif
+                endm
+; -----------------------------------------
 ; set the page number from the address #8000 - #BFFF
 ; In :
 ;   Page? - page number
@@ -156,6 +188,22 @@ SetPage2_A      macro
                 LD (MemoryPages + 2), A
                 LD BC, PAGE2
                 OUT (C), A
+                endif
+                endm
+; -----------------------------------------
+; get the page number from the address #8000 - #BFFF
+; In :
+; Out :
+;   A - page number
+; Corrupt :
+;   A
+; Note:
+; -----------------------------------------
+GetPage2        macro
+                ifdef MAPPING_REGISTERS
+                LD A, (FMADDR_REGS + HIGH PAGE2)
+                else
+                LD A, (MemoryPages + 2)
                 endif
                 endm
 ; -----------------------------------------

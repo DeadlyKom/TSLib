@@ -1,0 +1,6 @@
+
+                ifndef _MATH_MULTIPLY_UINTEGER_8x8_16_FAST_16KB_TABLE_MACRO_
+                define _MATH_MULTIPLY_UINTEGER_8x8_16_FAST_16KB_TABLE_MACRO_
+Table           DB #00
+
+                endif ; ~_MATH_MULTIPLY_UINTEGER_8x8_16_FAST_16KB_TABLE_MACRO_

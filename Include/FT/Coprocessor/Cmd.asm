@@ -220,7 +220,7 @@ DisplayError:   LD HL, .DL_Text
                 FT_WR_REG8 FT_REG_DLSWAP, FT_DLSWAP_FRAME
                 JR $
 
-.DL_Text        BYTE "Coprocessor fault!\0\0"                           ; needs to be aligned at 4-bytes
+.DL_Text        BYTE "Coprocessor fault!\0\0"                                   ; needs to be aligned at 4-bytes
 .DL_TextSize    EQU $ - .DL_Text
 .DL_Address     EQU FT_RAM_G + FT_RAM_G_SIZE - .DL_TextSize
 .DL_Error       EQU $
