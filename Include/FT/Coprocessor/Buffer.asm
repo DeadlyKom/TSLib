@@ -24,13 +24,14 @@ Copy:           LD DE, (BufferPtr)
 
                 ; 4-byte alignment (L % 4)
                 LD A, L
+                NEG
                 AND %00000011
                 JR Z, .Aligned
 
                 rept 2
                 LD (HL), C
                 INC HL
-                INC A
+                DEC A
                 JR Z, .Aligned
                 endr
 
@@ -39,31 +40,6 @@ Copy:           LD DE, (BufferPtr)
                         
 .Aligned        LD (BufferPtr), HL
 
-                RET
-; -----------------------------------------
-; append CMD command to CMD buffer
-; In :
-;   DE - low command
-;   BC - high command
-; Out :
-;   HL
-; Corrupt :
-; -----------------------------------------
-Command_BCDE:   LD HL, (BufferPtr)
-
-                LD (HL), E
-                INC HL
-
-                LD (HL), D
-                INC HL
-
-                LD (HL), C
-                INC HL
-
-                LD (HL), B
-                INC HL
-
-                LD (BufferPtr), HL
                 RET
 ; -----------------------------------------
 ; append ColorRGB command to CMD buffer
@@ -183,6 +159,61 @@ Cell:           AND #7F
                 LD B, #06
 
                 JR Command_BCDE
+; -----------------------------------------
+; append Text command to CMD buffer
+; In :
+;   HL - X
+;   DE - Y
+;   BC - Options
+;   A  - Font
+; Out :
+; Corrupt :
+;   HL, B
+; Note:
+;   FT_Text macro X?, Y?, Font?, Options?
+; -----------------------------------------
+Text:           PUSH BC
+                PUSH DE
+                PUSH HL
+
+                LD DE, #FF0C
+                LD BC, #FFFF
+                CALL Command_BCDE
+
+                POP DE
+                POP BC
+                CALL Command_BCDE
+
+                POP BC
+                LD E, A
+                LD D, #00
+                JR Command_BCDE
+
+; -----------------------------------------
+; append CMD command to CMD buffer
+; In :
+;   DE - low command
+;   BC - high command
+; Out :
+;   HL
+; Corrupt :
+; -----------------------------------------
+Command_BCDE:   LD HL, (BufferPtr)
+
+                LD (HL), E
+                INC HL
+
+                LD (HL), D
+                INC HL
+
+                LD (HL), C
+                INC HL
+
+                LD (HL), B
+                INC HL
+
+                LD (BufferPtr), HL
+                RET
 
 BufferPtr:      DW #0000
 

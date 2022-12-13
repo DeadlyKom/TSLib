@@ -330,6 +330,7 @@ FT_CMD_VIDEOFRAME           EQU 0xFFFFFF00 + 65
 FT_CMD_VIDEOSTART           EQU 0xFFFFFF00 + 64
 
 ; Parameter options
+FT_OPT_NONE                 EQU 0
 FT_OPT_3D                   EQU 0
 FT_OPT_RGB565               EQU 0
 FT_OPT_MONO                 EQU 1

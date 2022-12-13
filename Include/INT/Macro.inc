@@ -4,7 +4,7 @@
 ; -----------------------------------------
 ; interrupt type setting macro
 ; In :
-;   Value? - one or more (INT_MSK_FRAME/INT_MSK_LINE/INT_MSK_DMA)
+;   Value? - one or more (INT_MSK_FRAME/INT_MSK_LINE/INT_MSK_DMA/INT_MSK_NET)
 ; Out :
 ; Corrupt :
 ;  HL / (BC, A)
