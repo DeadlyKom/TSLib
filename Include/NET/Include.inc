@@ -2,6 +2,8 @@
                 ifndef _NET_INCLUDE_
                 define _NET_INCLUDE_
 
+                include "ZiFi/Command/ATConfig.inc"
+
                 module Net
 
                 ifdef _UART
@@ -9,7 +11,7 @@
                 endif
 
                 ifdef _ZIFI
-                include "ZIFI/Include.inc"
+                include "ZiFi/Include.inc"
                 endif
 
                 endmodule

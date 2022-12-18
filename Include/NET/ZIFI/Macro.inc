@@ -7,7 +7,7 @@
 ; Corrupt:
 ; -----------------------------------------
 REG_DR          macro
-                LD BC, ZIFI.DR
+                LD BC, DR
                 endm
 ; -----------------------------------------
 ; set port Command Register
@@ -16,7 +16,7 @@ REG_DR          macro
 ; Corrupt:
 ; -----------------------------------------
 REG_CMD         macro
-                LD BC, ZIFI.CR
+                LD BC, CR
                 endm
 ; -----------------------------------------
 ; set port Error Register
@@ -25,7 +25,7 @@ REG_CMD         macro
 ; Corrupt:
 ; -----------------------------------------
 REG_ER          macro
-                LD BC, ZIFI.ER
+                LD BC, ER
                 endm
 ; -----------------------------------------
 ; set port FIFO Used Register
@@ -34,7 +34,7 @@ REG_ER          macro
 ; Corrupt:
 ; -----------------------------------------
 REG_ZIFR        macro
-                LD BC, ZIFI.ZIFR
+                LD BC, ZIFR
                 endm
 ; -----------------------------------------
 ; set port FIFO Free Register
@@ -43,7 +43,7 @@ REG_ZIFR        macro
 ; Corrupt:
 ; -----------------------------------------
 REG_ZOFR        macro
-                LD BC, ZIFI.ZOFR
+                LD BC, ZOFR
                 endm
 ; -----------------------------------------
 ; set command to Command Register
@@ -81,7 +81,7 @@ INPUT_DATA      macro
 ; sync input data transfer
 ; In:
 ;   HL  - pointer destination buffer
-;   BS? - buffer size
+;   E   - buffer size
 ;   WD? - time waiting for data
 ; Out:
 ;   E   - remaining buffer space
@@ -89,29 +89,32 @@ INPUT_DATA      macro
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-SYNC_INPUT_DATA macro BS?, WD?
-                LD E, BS?
-                LD C, LOW ZIFI.ZIFR
+SYNC_INPUT_DATA macro WD?
+                LD C, LOW ZIFR
 
 .Loop           LD D, WD?
 .WaitData       XOR A
                 DEC D
                 JR Z, .Timeout
 
-                LD B, HIGH ZIFI.ZIFR
+                LD B, HIGH ZIFR
                 IN B, (C)
-                ; HALT
                 JR Z, .WaitData                                                 ; jump if input FIFO is full
 
                 ; clamp buffer size
                 LD A, E
                 SUB B
-                JR NC, $+4
+                JR NC, .NotOverflow
 
                 ; buffer overflow, limit number of bytes read by remaining space in buffer
-                LD B, E
-                XOR A
-                LD E, A
+                ; LD B, E
+                ; XOR A
+.Read           INI
+                DEC E
+                JR NZ, .Read
+                JR .Timeout
+
+.NotOverflow    LD E, A
 
                 ; read data from FIFO
                 INIR
@@ -147,7 +150,7 @@ OUTPUT_DATA     macro
 WAIT_EMPTY_FIFO_OUTPUT macro
                 REG_ZOFR
 .Loop           GET_RESULT
-                CP HIGH ZIFI.DR
+                CP HIGH DR
                 JR NZ, .Loop                                                    ; jump if output FIFO is full
                 endm
 ; -----------------------------------------
@@ -163,30 +166,43 @@ WAIT_EMPTY_FIFO_INPUT macro
                 OR A
                 JR NZ, .Loop                                                    ; jump if input FIFO is full
                 endm
-; ; -----------------------------------------
-; ; check input FIFO is empty
-; ; In:
-; ;   NumTries - number of tries to check
-; ; Out:
-; ;   if the C flag is reset then input FIFO is empty
-; ; Corrupt:
-; ;   time = 53 * NumTries + 20 tick CPU
-; ; -----------------------------------------
-; TRY_WAIT_EMPTY_FIFO_INPUT macro NumTries?
-;                 LD DE, NumTries?
-;                 REG_ZIFR
-
-; .Loop           ; counter
-;                 LD A, D
-;                 OR E
-;                 SCF
-;                 JR Z, .Failed
-;                 DEC DE
-                
-;                 GET_RESULT
-;                 OR A
-;                 JR NZ, .Loop                                                    ; jump if input FIFO is full
-; .Failed         ;
-;                 endm
+; -----------------------------------------
+; In:
+; Out:
+; Corrupt:
+; -----------------------------------------
+CLEAR_RESPONSE  macro
+                LD HL, ResponseFlags
+                RES RESPONSE_BIT, (HL)
+                endm
+; -----------------------------------------
+; In:
+; Out:
+; Corrupt:
+; -----------------------------------------
+SET_RESPONSE    macro
+                LD HL, ResponseFlags
+                SET RESPONSE_BIT, (HL)
+                endm
+; -----------------------------------------
+; In:
+; Out:
+; Corrupt:
+; -----------------------------------------
+CHECK_RESPONSE  macro
+                LD HL, ResponseFlags
+                BIT RESPONSE_BIT, (HL)
+                endm
+; -----------------------------------------
+; In:
+; Out:
+; Corrupt:
+; -----------------------------------------
+WAIT_RESPONSE   macro
+.WaitResponse   CALL Net.ZiFi.Response
+                LD HL, ResponseFlags
+                BIT RESPONSE_BIT, (HL)
+                JR Z, .WaitResponse
+                endm
 
                 endif ; ~_NET_ZIFI_MACRO_

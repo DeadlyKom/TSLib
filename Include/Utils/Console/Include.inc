@@ -8,7 +8,7 @@ Verbose         EQU 0x00
 Warning         EQU 0x01
 Error           EQU 0x02
 
-                define BUFFER_SIZE 512
+                define BUFFER_SIZE 2048
                 define HEIGHT_FONT 14
 
                 include "Initialize.asm"

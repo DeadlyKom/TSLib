@@ -2,8 +2,6 @@
                 ifndef _WIFI_CONF_
                 define _WIFI_CONF_
 
-                module ZIFI
-
 ; registers
 ; receives byte from input FIFO. Input FIFO must not be empty (xIFR > 0)
 ; sends byte into output FIFO. Output FIFO must not be full (xOFR > 0)
@@ -96,7 +94,5 @@ VER             EQU %11111111                                                   
 ; Error register (ER)
 RESULT_OK       EQU #00                                                         ; no error
 RESULT_REJ      EQU #FF                                                         ; command rejected
-
-                endmodule
 
                 endif ; ~_WIFI_CONF_

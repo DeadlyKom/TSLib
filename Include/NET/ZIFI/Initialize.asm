@@ -11,7 +11,7 @@
 ; -----------------------------------------
 Initialize:     ; detect ZiFi
                 REG_CMD
-                LD DE, (ZIFI.VER << 8) | ZIFI.API_MODE_1
+                LD DE, (VER << 8) | API_MODE_1
                 OUT (C), E                                                      ; set API mode 1
                 OUT (C), D                                                      ; get version
 
@@ -23,41 +23,6 @@ Initialize:     ; detect ZiFi
                 CALL ClearInput
                 CALL ClearOutput
 
-                ; ; command "disable echo"
-                ; LD HL, AT.DISABLE_ECHO
-                ; CALL SetCommand
-                ; JR C, .Error
-
-                ; command "get version"
-                LD HL, AT.VERSION_INFO
-                CALL SetCommand
-                JR C, .Error
-
-                ; command "Wi-Fi default mode"
-                LD HL, AT.SET_DEFAULT
-                CALL SetCommand
-                JR C, .Error
-
-                ; command "auto-connects to the AP"
-                LD HL, AT.AUTO_CONNECT_AP
-                CALL SetCommand
-                JR C, .Error
-
-                ; command "disable multiple connections"
-                LD HL, AT.MULT_CONNECT
-                CALL SetCommand
-                JR C, .Error
-
-                ; ; command "list access points"
-                ; LD HL, AT.ACCESS_POINS
-                ; CALL SetCommand
-                ; JR C, .Error
-
-                ; command "connect to access point"
-                LD HL, AT.CONNECT_AP
-                CALL SetCommand
-                JR C, .Error
-
                 ; successful initialization
                 OR A
                 RET
@@ -66,63 +31,41 @@ Initialize:     ; detect ZiFi
                 SCF
                 RET
 
-SetCommand:     ; send command
-                LD DE, .AnswerBuffer
-                CALL SendATCommand
-                
-.L1             ; check response
-                LD HL, .AnswerBuffer
-                LD DE, AT.RESPONSE.OK
-                CALL String.Contains
-                EX AF, AF'
+Setting:        ; command "disable echo"
+;                 LD A, DISABLE
+;                 CALL Cmd.EnableEcho
+;                 CALL WaitResponce
 
-                ; filter and add response message
-                LD HL, .Predicate
-                LD DE, .AnswerBuffer
-                EXX
-                LD HL, .AnswerBuffer
-                EXX
-                CALL String.Filter
+                ; ; command "get version"
+                CALL Cmd.CheckVersion
+                CALL WaitResponce
 
-                EX AF, AF'
-                RET NC
+                ; command "Wi-Fi default mode"
+                LD A, WIFI_MODE_ST | OLD_SDK
+                CALL Cmd.SetMode
+                CALL WaitResponce
 
-                OR A
-.L2             EQU $+1
-                LD A, #80
-                DEC A
-                LD (.L2), A
-                RET Z
+                ; command "auto-connects to the AP"
+                LD A, DISABLE
+                CALL Cmd.SetAutoConnect
+                CALL WaitResponce
 
-                HALT
-                LD HL, .AnswerBuffer
-                SYNC_INPUT_DATA ZIFI.FIFO_SIZE, #00
-                JR .L1
+                ; command "disable multiple connections"
+                LD A, SINGLE
+                CALL Cmd.SetMultConnect
+                CALL WaitResponce
 
-.Predicate      CP "\r"
-                JR Z, .Remove
-                CP "\n"
-                JR Z, .Set
+                ; command "list access points"
+                CALL Cmd.GetListAPs
+                CALL WaitResponce
 
-                OR A
+                ; ; command "connect to access point"
+                ; LD A, OLD_SDK
+                ; LD HL, .SSID
+                ; LD DE, .PASSWORD
+                ; CALL Cmd.ConnectToAP
+                ; CALL WaitResponce
+
                 RET
-
-.Set            XOR A
-                LD (DE), A
-                PUSH DE
-                EXX
-                LD A, Console.Verbose
-                CALL Console.Add
-                POP HL
-                INC HL
-                EXX
-
-                OR A
-                RET
-
-.Remove         SCF
-                RET
-
-.AnswerBuffer   DS ZIFI.FIFO_SIZE, 0
 
                 endif ; ~_NET_WIFI_INITIALIZE_

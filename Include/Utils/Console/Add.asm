@@ -16,12 +16,13 @@ Add:            ;
                 INC DE
                 LD BC, (Buffer.Free)
                 CALL String.Copy
+                XOR A
+                LD (DE), A
+                INC DE
                 LD (Buffer.Offset), DE
 
                 ; buffer
-                LD HL, (Buffer.Free)
-                SBC HL, BC
-                LD (Buffer.Free), HL
+                LD (Buffer.Free), BC
 
                 LD HL, Buffer.Counter
                 INC (HL)

@@ -8,7 +8,7 @@
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-ClearInput:     SET_COMMAND ZIFI.ZFCLRFIFO_I
+ClearInput:     SET_COMMAND ZFCLRFIFO_I
                 WAIT_EMPTY_FIFO_INPUT
                 RET
 ; -----------------------------------------
@@ -18,39 +18,35 @@ ClearInput:     SET_COMMAND ZIFI.ZFCLRFIFO_I
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-ClearOutput:    SET_COMMAND ZIFI.ZFCLRFIFO_O
+ClearOutput:    SET_COMMAND ZFCLRFIFO_O
                 WAIT_EMPTY_FIFO_OUTPUT
                 RET
 ; -----------------------------------------
 ; send AT command
 ; In:
-;   HL - pointer AT command
-;   DE - pointer read data
+;   HL - pointer to string AT command
+;   E  - string length AT command
 ; Out:
 ; Corrupt:
 ; Note:
 ; -----------------------------------------
-SendATCommand:  ; initialize
-                XOR A
-                REG_DR
+SendATCommand:  LD BC, ZOFR
+
+                ; waiting for a suitable AT command size in FIFO
+.WaitLoop       IN A, (C)
+                CP E
+                JR C, .WaitLoop
                 
                 ; send AT command
+                LD B, HIGH DR
 .SendLoop       OUTI
-                CP (HL)
+                DEC E
                 JR NZ, .SendLoop
 
-                ; read data
-                EX DE, HL
-                SYNC_INPUT_DATA ZIFI.FIFO_SIZE, #00
-
+                CLEAR_RESPONSE
                 RET
 
-; Command:        ;
-
-;                 LD BC, ZIFI.ZOFR
-; .Loop           IN A, (C)
-;                 CP E
-
-;                 RET
+WaitResponce:   WAIT_RESPONSE
+                RET
 
                 endif ; ~_NET_ZIFI_FIFO_

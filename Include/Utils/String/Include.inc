@@ -5,10 +5,12 @@
                 module String
 
                 include "Copy.asm"
-                include "GetLength.asm"
+                include "Filter.asm"
                 include "Compare.asm"
                 include "Contains.asm"
-                include "Filter.asm"
+                include "GetLength.asm"
+                include "ByteToString.asm"
+                include "NumberToString.asm"
 
                 endmodule
 

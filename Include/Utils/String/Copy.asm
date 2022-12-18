@@ -5,32 +5,19 @@
 ; copy string
 ; In:
 ;   HL - pointer to string
-;   DE - destenation
+;   DE - destenation buffer
 ;   BC - buffer size
 ; Out:
-;   BC - length copy string
+;   BC - remaining free buffer size
 ; Corrupt:
 ;   HL, DE, BC, AF
 ; Note:
 ; -----------------------------------------
 Copy:           XOR A
-                PUSH BC
-
 .Loop           CP (HL)
+                RET Z                                                           ; exit, if null-terminated
                 LDI
-                JR Z, .NullTerminated
                 JP PE, .Loop
-
-                ; unknow length string (BC = 0)
-                LD B, A
-                LD C, A
-                POP AF
-                RET
-
-.NullTerminated POP HL
-                SBC HL, BC
-                LD B, H
-                LD C, L
 
                 RET
 

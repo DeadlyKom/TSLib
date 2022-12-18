@@ -7,6 +7,9 @@ Initialize:     CALL Init_Core
                 CALL Init_Video
                 CALL Init_Console
                 CALL Init_ZIFI
+
+                ; command "get version"
+                CALL Net.ZiFi.Setting
                 RET
 
 Init_Core:      FMapAddrInit
@@ -53,7 +56,7 @@ Init_Video:     ; reset coprocessor
 
 Init_Console:   JP Console.Initialize
 
-Init_ZIFI:      CALL Net.ZIFI.Initialize
+Init_ZIFI:      CALL Net.ZiFi.Initialize
                 JR C, .Failed
                 ; PUSH HL
 

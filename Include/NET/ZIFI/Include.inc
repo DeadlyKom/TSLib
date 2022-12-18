@@ -2,13 +2,14 @@
                 ifndef _NET_ZIFI_INCLUDE_
                 define _NET_ZIFI_INCLUDE_
 
-                module ZIFI
+                module ZiFi
 
-                include "Macro.inc"
                 include "ZiFiConfig.inc"
-                include "AT_Command.inc"
+                include "Macro.inc"
+                include "Command/Include.inc"
                 include "Initialize.asm"
                 include "FIFO.asm"
+                include "Response.asm"
 
                 endmodule
 

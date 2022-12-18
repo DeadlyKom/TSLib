@@ -6,6 +6,7 @@
             "type": "shell",
             "command": "./Build/SPG/Build.bat",
             "problemMatcher": {
+                "owner": "c",
                 "fileLocation": [
                     "relative",
                     "${workspaceRoot}"
