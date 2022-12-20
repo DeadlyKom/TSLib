@@ -23,6 +23,7 @@ FT_CMD_ACTIVE               EQU 0x00        ; cc 00 00
 FT_CMD_STANDBY              EQU 0x41        ; cc 00 00
 FT_CMD_SLEEP                EQU 0x42        ; cc 00 00
 FT_CMD_PWRDOWN              EQU 0x43        ; cc 00 00
+FT_CMD_PWRDOWN_             EQU 0x50        ; cc 00 00
 FT_CMD_CLKEXT               EQU 0x44        ; cc 00 00
 FT_CMD_CLKINT               EQU 0x48        ; cc 00 00
 FT_CMD_PDROMS               EQU 0x49        ; cc xx 00

@@ -2,23 +2,36 @@
                 ifndef _EXAMPLE_CORE_MAIN_LOOP_
                 define _EXAMPLE_CORE_MAIN_LOOP_
 
-MainLoop:       ; maybe some code
-                ; ...
-
+MainLoop:       
 .Loop           FT_CMD_Start
                 FT_DL_Start
                 
                 FT_ClearColorRGB 0, 0, 0
                 FT_ClearAll
 
-                ; some draw code
-                ; ....
+                ; render menu "not zifi"
+                CHECK_HARDWARE_FLAG ZIFI_BIT
+                CALL Z, ScrNotZiFi
 
-                CALL Console.Draw
+                ; render menu
+                LD A, (Flags.Menu)
+                CP MENU_START_GAME
+                CALL Z, ScrMain
 
-                ; LD HL, .Flags
-                ; BIT 7, (HL)
-                ; CALL NZ, Debug.Draw.TextVGA
+                ; render options
+                LD A, (Flags.Menu)
+                CP MENU_OPTIONS
+                CALL Z, ScrOptions
+
+                ; render resolution
+                LD A, (Flags.Menu)
+                CP MENU_RESOLUTION
+                CALL Z, ScrResolution
+
+                ; render connect
+                LD A, (Flags.Menu)
+                CP MENU_CONNECT
+                CALL Z, ScrConnect
 
                 FT_Display
                 FT_CMD_Swap
@@ -29,23 +42,8 @@ MainLoop:       ; maybe some code
                 AND FT_INT_SWAP
                 JR Z, .WaitIntSwap
 
-                ; LD HL, .Flags
-                ; BIT 7, (HL)
-                ; CALL NZ, Debug.Draw.Screen
-                ; LD HL, .Flags
-                ; BIT 6, (HL)
-                ; JP Z, .Loop
-                ; LD HL, .Counter
-                ; DEC (HL)
-                ; HALT
-                ; JP NZ, .Loop
-                ; LD HL, .Flags
-                ; SET 7, (HL)
-                ; RES 6, (HL)
+                CALL Input
 
                 JP .Loop
-
-.Flags          DB #00
-.Counter        DB #00
 
                 endif ; ~_EXAMPLE_CORE_MAIN_LOOP_

@@ -36,28 +36,28 @@ Setting:        ; command "disable echo"
 ;                 CALL Cmd.EnableEcho
 ;                 CALL WaitResponce
 
-                ; ; command "get version"
-                CALL Cmd.CheckVersion
-                CALL WaitResponce
+                ; ; ; command "get version"
+                ; CALL Cmd.CheckVersion
+                ; CALL WaitResponce
 
-                ; command "Wi-Fi default mode"
-                LD A, WIFI_MODE_ST | OLD_SDK
-                CALL Cmd.SetMode
-                CALL WaitResponce
+                ; ; command "Wi-Fi default mode"
+                ; LD A, WIFI_MODE_ST | OLD_SDK
+                ; CALL Cmd.SetMode
+                ; CALL WaitResponce
 
-                ; command "auto-connects to the AP"
-                LD A, DISABLE
-                CALL Cmd.SetAutoConnect
-                CALL WaitResponce
+                ; ; command "auto-connects to the AP"
+                ; LD A, DISABLE
+                ; CALL Cmd.SetAutoConnect
+                ; CALL WaitResponce
 
-                ; command "disable multiple connections"
-                LD A, SINGLE
-                CALL Cmd.SetMultConnect
-                CALL WaitResponce
+                ; ; command "disable multiple connections"
+                ; LD A, SINGLE
+                ; CALL Cmd.SetMultConnect
+                ; CALL WaitResponce
 
-                ; command "list access points"
-                CALL Cmd.GetListAPs
-                CALL WaitResponce
+                ; ; command "list access points"
+                ; CALL Cmd.GetListAPs
+                ; CALL WaitResponce
 
                 ; ; command "connect to access point"
                 ; LD A, OLD_SDK
@@ -67,5 +67,7 @@ Setting:        ; command "disable echo"
                 ; CALL WaitResponce
 
                 RET
+.SSID           BYTE "POCO X4 Pro 5G\0"
+.PASSWORD       BYTE "f493606304f\0"
 
                 endif ; ~_NET_WIFI_INITIALIZE_

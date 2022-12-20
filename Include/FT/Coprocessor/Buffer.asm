@@ -14,9 +14,7 @@
 ;   HL - address string
 ;   BC - length string
 ; Out :
-;   
 ; Corrupt :
-;   
 ; -----------------------------------------
 Copy:           LD DE, (BufferPtr)
                 LDIR
@@ -214,6 +212,33 @@ Command_BCDE:   LD HL, (BufferPtr)
 
                 LD (BufferPtr), HL
                 RET
+; -----------------------------------------
+; append Spinner command to CMD buffer
+; In :
+;   HL - X
+;   DE - Y
+;   BC - Scale
+;   A  - Style
+; Out :
+; Corrupt :
+;   HL, B
+; -----------------------------------------
+Spinner:        PUSH BC
+                PUSH DE
+                PUSH HL
+
+                LD DE, (FT_CMD_SPINNER >> 0)  & 0xFFFF
+                LD BC, (FT_CMD_SPINNER >> 16) & 0xFFFF
+                CALL Command_BCDE
+
+                POP DE
+                POP BC
+                CALL Command_BCDE
+
+                POP BC
+                LD E, A
+                LD D, #00
+                JR Command_BCDE
 
 BufferPtr:      DW #0000
 

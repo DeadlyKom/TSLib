@@ -36,7 +36,7 @@ Initialize:     FT_SEND_COMMAND FT_CMD_RST_PULSE
                 FT_TAB_LOAD FT_REG_HSYNC1
                 FT_TAB_LOAD FT_REG_HOFFSET
                 FT_TAB_LOAD FT_REG_HSIZE
-                FT_TAB_LOAD FT_REG_HCYCLE
+                FT_TAB_LOAD FT_REG_HCYCLE   ;
                 FT_TAB_LOAD FT_REG_VSYNC0
                 FT_TAB_LOAD FT_REG_VSYNC1
                 FT_TAB_LOAD FT_REG_VOFFSET

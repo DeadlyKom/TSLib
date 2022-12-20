@@ -12,6 +12,7 @@
 ; Corrupt:
 ;   HL, DE, BC, AF
 ; Note:
+;   not copy null-terminate
 ; -----------------------------------------
 Copy:           XOR A
 .Loop           CP (HL)

@@ -53,10 +53,4 @@ WaitFlush:      PUSH HL
                 SCF
                 RET
 
-; .Wait           ; read available CMDB buffer space
-;                 FT_RD_REG16 FT_REG_CMDB_SPACE
-;                 LD A, B
-;                 OR C
-;                 JR Z, .Wait
-
                 endif ; ~_COPROCESSOR_WAIT_FLUSH_

@@ -4,12 +4,16 @@
 
                 ORG EntryPoint
 
+                include "Flags.inc"
+                include "HardwareFlags.inc"
+
                 module Core
 Start:
                 include "EntryPoint.asm"
                 include "Initialize.asm"
                 include "MainLoop.asm"
-
+                include "Input.asm"
+                include "Menu/Include.inc"
 End:
 Size:           EQU End - Start
 

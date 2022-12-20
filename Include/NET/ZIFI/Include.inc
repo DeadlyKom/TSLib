@@ -11,6 +11,8 @@
                 include "FIFO.asm"
                 include "Response.asm"
 
+Handler:        DW #0000
+
                 endmodule
 
                 endif ; ~_NET_ZIFI_INCLUDE_

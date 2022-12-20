@@ -69,13 +69,21 @@ Response:       ;
                 SBC HL, DE
                 JR Z, .Next
 
+                PUSH DE
                 EX DE, HL
-                PUSH HL
-                LD A, Console.Verbose
-                CALL Console.Add
-                POP HL
                 CALL Approve
+                POP DE
 
+                ; execute handler
+                LD HL, .Callback
+                PUSH HL
+                LD HL, (Handler)
+                LD A, H
+                OR L
+                RET Z
+                JP (HL)
+
+.Callback       ;
 .Next           POP HL
                 INC HL
                 POP BC

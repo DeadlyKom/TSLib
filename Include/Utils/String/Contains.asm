@@ -37,8 +37,11 @@ Contains:       ; check length string more zero
                 INC DE
                 JR .Compare
 
-.NextChar       EX DE, HL
+.NextChar       LD A, (HL)
                 OR A
+                JR Z, .Fail
+
+                EX DE, HL
                 SBC HL, BC
                 EX DE, HL
                 SBC HL, DE
@@ -50,7 +53,7 @@ Contains:       ; check length string more zero
                 DEC A
                 JR NZ, .Loop
 
-                SCF
+.Fail           SCF
                 RET
 
                 endif ; ~_STRING_CONTAINS_

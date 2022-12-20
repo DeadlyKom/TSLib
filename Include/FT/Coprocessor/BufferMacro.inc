@@ -216,6 +216,14 @@ FT_ScrollBar            macro x?, y?, w?, h?, Options?, Value?, Size?, Range?
                         FT_CMD_BUF ((Value?  & 0xFFFF) << 16 | (Options?  & 0xFFFF))
                         FT_CMD_BUF ((Range?  & 0xFFFF) << 16 | (Size?     & 0xFFFF))
                         endm
+FT_Spinner              macro x?, y?, Style?, Scale?
+                        FT_CMD_BUF FT_CMD_SPINNER
+                        FT_CMD_BUF ((y?      & 0xFFFF) << 16 | (x?        & 0xFFFF))
+                        FT_CMD_BUF ((Scale?  & 0xFFFF) << 16 | (Style?    & 0xFFFF))
+                        endm
+FT_Stop                 macro
+                        FT_CMD_BUF FT_CMD_STOP
+                        endm
 FT_SetBase              macro Base?
                         FT_CMD_BUF FT_CMD_SETBASE
                         FT_CMD_BUF (Base? & 0xFFFFFFFF)
@@ -273,6 +281,11 @@ FT_BitmapTransform      macro Sx0?, Sy0?, Sx1?, Sy1?, Sx2?, Sy2?, Tx0?, Ty0?, Tx
                         FT_CMD_BUF Tx2?
                         FT_CMD_BUF Ty2?
                         FT_CMD_BUF Result?
+                        endm
+FT_SetFont              macro Font?, Address?
+                        FT_CMD_BUF FT_CMD_SETFONT
+                        FT_CMD_BUF Font?
+                        FT_CMD_BUF Address?
                         endm
 FT_String               macro Address?, Length?
                         LD HL, (Address?) & 0xFFFF

@@ -172,8 +172,8 @@ WAIT_EMPTY_FIFO_INPUT macro
 ; Corrupt:
 ; -----------------------------------------
 CLEAR_RESPONSE  macro
-                LD HL, ResponseFlags
-                RES RESPONSE_BIT, (HL)
+                LD HL, Net.ZiFi.ResponseFlags
+                RES Net.ZiFi.RESPONSE_BIT, (HL)
                 endm
 ; -----------------------------------------
 ; In:
@@ -181,8 +181,8 @@ CLEAR_RESPONSE  macro
 ; Corrupt:
 ; -----------------------------------------
 SET_RESPONSE    macro
-                LD HL, ResponseFlags
-                SET RESPONSE_BIT, (HL)
+                LD HL, Net.ZiFi.ResponseFlags
+                SET Net.ZiFi.RESPONSE_BIT, (HL)
                 endm
 ; -----------------------------------------
 ; In:
@@ -190,8 +190,8 @@ SET_RESPONSE    macro
 ; Corrupt:
 ; -----------------------------------------
 CHECK_RESPONSE  macro
-                LD HL, ResponseFlags
-                BIT RESPONSE_BIT, (HL)
+                LD HL, Net.ZiFi.ResponseFlags
+                BIT Net.ZiFi.RESPONSE_BIT, (HL)
                 endm
 ; -----------------------------------------
 ; In:
@@ -200,8 +200,8 @@ CHECK_RESPONSE  macro
 ; -----------------------------------------
 WAIT_RESPONSE   macro
 .WaitResponse   CALL Net.ZiFi.Response
-                LD HL, ResponseFlags
-                BIT RESPONSE_BIT, (HL)
+                LD HL, Net.ZiFi.ResponseFlags
+                BIT Net.ZiFi.RESPONSE_BIT, (HL)
                 JR Z, .WaitResponse
                 endm
 

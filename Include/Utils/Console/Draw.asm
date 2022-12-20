@@ -38,7 +38,7 @@ Draw:           ; initialize
                 CALL FT.Coprocessor.ColorRGB
 
                 ; FT_Text
-                LD HL, #0000                                           
+                LD HL, #0000
 .Row            EQU $+1
                 LD A, #00
                 OR A
