@@ -87,9 +87,65 @@ FT_ACTIVE       macro
 ; -----------------------------------------
 FT_CMD_RESET    macro
                 FT_WR_REG8  FT_REG_CPURESET,  1
+                FT_DELAY 5
                 FT_WR_REG32 FT_REG_CMD_READ,  0
                 FT_WR_REG32 FT_REG_CMD_WRITE, 0
                 FT_WR_REG8  FT_REG_CPURESET,  0
+                FT_DELAY 5
+                endm
+; -----------------------------------------
+; reset and boot-up sequence
+; In :
+; Out :
+; Corrupt :
+;   AF
+; Note:
+; -----------------------------------------
+FT_BOOT_UP      macro
+                FT_SEND_COMMAND FT_CMD_PWRDOWN_
+                FT_DELAY 3
+                
+                FT_SEND_COMMAND FT_CMD_CLKEXT
+                FT_DELAY 3
+
+                LD B, FT_CMD_CLKSEL
+                LD C, #C0
+                CALL FT.SendCommand.Param
+
+                FT_SEND_COMMAND FT_CMD_ACTIVE
+                FT_DELAY 15
+
+.WaitIntReady   ; wait, FT812 is ready
+                FT_RD_REG8 FT_REG_ID
+                CP #7C
+                JR NZ, .WaitIntReady
+
+.WaitCPU_Reset  ; wait
+                FT_RD_REG8 FT_REG_CPURESET
+                OR A
+                JR NZ, .WaitCPU_Reset
+
+                FT_WR_REG8 FT_REG_PCLK, 0
+                FT_WR_REG16 FT_REG_HCYCLE, 0x224
+                FT_WR_REG16 FT_REG_HOFFSET, 0x02B
+                FT_WR_REG16 FT_REG_HSYNC0, 0x000
+                FT_WR_REG16 FT_REG_HSYNC1, 0x029
+                FT_WR_REG16 FT_REG_VCYCLE, 0x124
+                FT_WR_REG16 FT_REG_VOFFSET, 0x00C
+                FT_WR_REG16 FT_REG_VSYNC0, 0x000
+                FT_WR_REG16 FT_REG_VSYNC1, 0x00A
+                FT_WR_REG8 FT_REG_SWIZZLE, 0x000
+                FT_WR_REG8 FT_REG_PCLK_POL, 0x000
+                FT_WR_REG16 FT_REG_HSIZE, 0x1E0
+                FT_WR_REG16 FT_REG_VSIZE, 0x110
+                FT_WR_REG16 FT_REG_CSPREAD, 0x001
+                FT_WR_REG16 FT_REG_DITHER, 0x001
+                FT_WR_REG16 FT_REG_OUTBITS, 0x000
+
+                FT_WR_REG16 FT_REG_GPIOX_DIR, 0xFFFF
+                FT_WR_REG16 FT_REG_GPIOX, 0xFFFF
+
+                FT_WR_REG8 FT_REG_PCLK, 2
                 endm
 ; -----------------------------------------
 ; send command FT812 1st byte

@@ -126,10 +126,12 @@ MEM_LCK_BS          EQU #06
 INT_VEC_FRAME       EQU #FF
 INT_VEC_LINE        EQU #FD
 INT_VEC_DMA         EQU #FB
+INT_VEC_NET         EQU #F9
 
 INT_MSK_FRAME       EQU #01
 INT_MSK_LINE        EQU #02
 INT_MSK_DMA         EQU #04
+INT_MSK_NET         EQU #08
 
 ; DMA
 DMA_WNR             EQU #80

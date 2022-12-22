@@ -9,6 +9,11 @@
             include "FT/Include.inc"
             include "INT/Macro.inc"
             include "Input/Include.inc"
+
+            
+            ; define _UART - included UART files
+            ; define _WIFI - included WIFI files
+            include "NET/Include.inc"
             
             include "NVRAM/Include.inc"
             include "Video/Macro.inc"

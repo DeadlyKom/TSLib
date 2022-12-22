@@ -28,4 +28,24 @@ FT_WR_INFLATE   macro Destination?, Page?, Source?, Size?
                 CALL FT.Coprocessor.Inflate
                 endm
 
+FT_ALIGN        macro
+                ; 4-byte alignment (L % 4)
+                LD A, L
+                NEG
+                AND %00000011
+                JR Z, .Aligned
+
+                rept 2
+                LD (HL), #00
+                INC HL
+                DEC A
+                JR Z, .Aligned
+                endr
+
+                LD (HL), #00
+                INC HL
+                        
+.Aligned        ;
+                endm
+
                 endif ; ~_COPROCESSOR_MACRO_

@@ -15,7 +15,7 @@ UpdateMouseState:           CALL GetMouseX
                             SUB (HL)
                             LD (HL), E
                             LD D, #00
-                            JR Z, .SkipChangeX                      ; delta is zero
+                            JR Z, .SkipChangeX                                  ; delta is zero
                             JP P, .PositiveX
 
 .NegativeX                  LD HL, (PositionX)
@@ -23,10 +23,10 @@ UpdateMouseState:           CALL GetMouseX
                             LD E, A
                             OR A
                             SBC HL, DE
-                            JR NC, .SetMouseLocationX                   ; overflow check
+                            JR NC, .SetMouseLocationX                           ; overflow check
 
                             ; cursor has reached the left edge of the screen
-                            LD HL, #0000                                ; clamp the value
+                            LD HL, #0000                                        ; clamp the value
                             JR .SetMouseLocationX
 
 .PositiveX                  LD HL, (PositionX)
@@ -40,7 +40,7 @@ UpdateMouseState:           CALL GetMouseX
                             EX DE, HL
                             SBC HL, DE
                             EX DE, HL
-                            JR NC, .SetMouseLocationX                   ; overflow check
+                            JR NC, .SetMouseLocationX                           ; overflow check
 
                             ; cursor reaches the right edge of the screen
                             LD H, B
@@ -56,8 +56,8 @@ UpdateMouseState:           CALL GetMouseX
                             SUB (HL)
                             LD (HL), E
 
-                            RET Z                                       ; delta is zero
-                            NEG                                         ; invert the Y-axis value
+                            RET Z                                               ; delta is zero
+                            NEG                                                 ; invert the Y-axis value
                             JP P, .PositiveY
 
 .NegativeY                  LD HL, (PositionY)
@@ -65,10 +65,10 @@ UpdateMouseState:           CALL GetMouseX
                             LD E, A
                             OR A
                             SBC HL, DE
-                            JR NC, .SetMouseLocationY                   ; overflow check
+                            JR NC, .SetMouseLocationY                           ; overflow check
 
                             ; cursor has reached the top of the screen
-                            LD HL, #0000                                ; clamp the value
+                            LD HL, #0000                                        ; clamp the value
                             JR .SetMouseLocationY
 
 .PositiveY                  LD HL, (PositionY)
@@ -82,7 +82,7 @@ UpdateMouseState:           CALL GetMouseX
                             EX DE, HL
                             SBC HL, DE
                             EX DE, HL
-                            JR NC, .SetMouseLocationY                   ; overflow check
+                            JR NC, .SetMouseLocationY                           ; overflow check
 
                             ; cursor reaches the bottom of the screen
                             LD H, B

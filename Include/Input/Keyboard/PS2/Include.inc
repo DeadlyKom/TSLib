@@ -14,7 +14,7 @@
             include "Release.asm"
             include "UpdateStates.asm"
 KeyStates   DS 32, 0
-
+AnyKeys     DB #00
             endmodule
 
             endif ; ~_INPUT_KEYBOARD_PS2_INCLUDE_
