@@ -13,6 +13,7 @@ Start:
                 include "Initialize.asm"
                 include "MainLoop.asm"
                 include "Input.asm"
+                include "Interrapt.asm"
                 include "Menu/Include.inc"
 End:
 Size:           EQU End - Start

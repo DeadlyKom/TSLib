@@ -2,7 +2,11 @@
                         ifndef _INPUT_KEYBOARD_PS2_UPDATE_STATES_
                         define _INPUT_KEYBOARD_PS2_UPDATE_STATES_
 
-StateUpdates:           LD HL, KeyStates
+StateUpdates:           ; reset flag AnyKeys
+                        XOR A
+                        LD (AnyKeys), A
+
+                        LD HL, KeyStates
                         LD D, #00
 
 .LastExtendedOffset     EQU $+1
@@ -42,15 +46,19 @@ StateUpdates:           LD HL, KeyStates
                         LD E, A
                         ADD HL, DE
 .SetKeyState            EQU $+1
-                        DB #CB, #00                         ; RES/SET N,(HL)
+                        DB #CB, #00                                             ; RES/SET N,(HL)
                         SBC HL, DE
 
                         ; set default values
                         XOR A
                         LD E, A
                         LD (.LastExtendedOffset), A
-                        LD A, %11000110                     ; SET 0, (HL)
+                        LD A, %11000110                                         ; SET 0, (HL)
                         LD (.StateOperationMask), A
+
+                        ; set flag AnyKeys
+                        LD A, #FF
+                        LD (AnyKeys), A
                         JR .ScanCode
 
 .IsExtendedKeys         LD A, #80
@@ -58,7 +66,7 @@ StateUpdates:           LD HL, KeyStates
                         LD (.LastExtendedOffset), A
                         JR .ScanCode
 
-.ResetStateKey          LD A, %10000110                     ; RES 0, (HL)
+.ResetStateKey          LD A, %10000110                                         ; RES 0, (HL)
                         LD (.StateOperationMask), A
                         JR .ScanCode
 

@@ -24,6 +24,11 @@ TSLibPage           EQU #00                                                     
 Flags:
 .Menu               EQU Variables + 0                                           ; номер меню
 .Hardware           EQU Variables + 1                                           ; флаги аппаратного обеспечения
+.Input              EQU Variables + 2                                           ; флаги ввода
+.InputCursor        EQU Variables + 3                                           ; положение курсора
+.InputBufferSize    EQU Variables + 4                                           ; размер буфера ввода
+.InputBuffer        EQU Variables + 5                                           ; адрес буфера ввода
+.InputBack          EQU Variables + 7                                           ; адрес функции завершения/возврата режима ввода
 
 
                     endif ; ~_EXAMPLE_INCLUDE_

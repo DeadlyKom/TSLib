@@ -221,7 +221,6 @@ Command_BCDE:   LD HL, (BufferPtr)
 ;   A  - Style
 ; Out :
 ; Corrupt :
-;   HL, B
 ; -----------------------------------------
 Spinner:        PUSH BC
                 PUSH DE
@@ -239,6 +238,51 @@ Spinner:        PUSH BC
                 LD E, A
                 LD D, #00
                 JR Command_BCDE
+; -----------------------------------------
+; append ScrollBar command to CMD buffer
+; In :
+;   SP+0  - x-coordinate of scroll bar top-left, in pixels
+;   SP+2  - y-coordinate of scroll bar top-left, in pixels
+;   SP+4  - width of scroll bar, in pixels. if width is greater than height, the scroll bar is drawn horizontally
+;   SP+6  - height of scroll bar, in pixels. if height is greater than width, the scroll bar is drawn vertically
+;   SP+8  - by default the scroll bar is drawn with a 3D effect and the value of options is zero. options OPT_FLAT remove the 3D effect and its value is 256
+;   SP+10 - displayed value of scroll bar, between 0 and range inclusive
+;   SP+12 - size
+;   SP+14 - maximum value
+; Out :
+; Corrupt :
+; Note:
+;   FT_ScrollBar macro x?, y?, w?, h?, Options?, Value?, Size?, Range?
+; -----------------------------------------
+ScrollBar:      POP HL
+                LD (.ReturnAddress), HL
+
+                ; FT_CMD_BUF FT_CMD_SCROLLBAR
+                LD DE, (FT_CMD_SCROLLBAR >> 0)  & 0xFFFF
+                LD BC, (FT_CMD_SCROLLBAR >> 16) & 0xFFFF
+                CALL Command_BCDE
+
+                ; FT_CMD_BUF ((y?      & 0xFFFF) << 16 | (x?        & 0xFFFF))
+                POP DE
+                POP BC
+                CALL Command_BCDE
+
+                ; FT_CMD_BUF ((h?      & 0xFFFF) << 16 | (w?        & 0xFFFF))
+                POP DE
+                POP BC
+                CALL Command_BCDE
+                ; FT_CMD_BUF ((Value?  & 0xFFFF) << 16 | (Options?  & 0xFFFF))
+                POP DE
+                POP BC
+                CALL Command_BCDE
+
+                ; FT_CMD_BUF ((Range?  & 0xFFFF) << 16 | (Size?     & 0xFFFF))
+                POP DE
+                POP BC
+                CALL Command_BCDE
+            
+.ReturnAddress  EQU $+1
+                JP #0000
 
 BufferPtr:      DW #0000
 

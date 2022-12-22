@@ -117,7 +117,19 @@ FT_ColorRGB             macro Red?, Green?, Blue?
                         endm
 FT_ColorRGB32           macro RGB?
                         FT_CMD_BUF ((0x04 << 24) | (RGB? & 0xFFFFFF))
-                        endm   
+                        endm
+FT_FGColor              macro xRGB?
+                        FT_CMD_BUF FT_CMD_FGCOLOR
+                        FT_CMD_BUF (xRGB? & 0x00FFFFFF)
+                        endm
+FT_BGColor              macro xRGB?
+                        FT_CMD_BUF FT_CMD_BGCOLOR
+                        FT_CMD_BUF (xRGB? & 0x00FFFFFF)
+                        endm
+FT_GRADColor            macro xRGB?
+                        FT_CMD_BUF FT_CMD_GRADCOLOR
+                        FT_CMD_BUF (xRGB? & 0x00FFFFFF)
+                        endm
 FT_Display              macro
                         FT_CMD_BUF (0 << 24)
                         endm

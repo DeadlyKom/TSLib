@@ -2,6 +2,7 @@
                 ifndef _MENU_OPTIONS_CONNECT_ZI_FI_
                 define _MENU_OPTIONS_CONNECT_ZI_FI_
 
+ZIFI_CONNECTED  EQU 0xFE
 ZIFI_UNKNOW     EQU 0xFF
 ZIFI_ATE        EQU 0x00
 ZIFI_GMR        EQU 0x01
@@ -9,6 +10,7 @@ ZIFI_CWMODE     EQU 0x02
 ZIFI_CWAUTOCONN EQU 0x03
 ZIFI_CIPMUX     EQU 0x04
 ZIFI_CWLAP      EQU 0x05
+ZIFI_CWJAP      EQU 0x06
 ; -----------------------------------------
 ; In:
 ; Out:
@@ -21,8 +23,7 @@ ZiFi.Init:      LD HL, ZiFi.Callback
                 ; wait, finish old command
                 LD A, (ZiFi.CMD)
                 INC A
-                CALL NZ, Net.ZiFi.WaitResponce
-
+                CALL NZ, Net.ZiFi.WaitResponse
 ; -----------------------------------------
 ; In:
 ; Out:
@@ -45,8 +46,25 @@ ZiFi.Sutdown:   LD HL, #0000
 
                 ; stop any spinner
                 FT_Stop
-
                 RET
+; -----------------------------------------
+; In:
+;   HL - SSID
+;   DE - password
+; Out:
+; Corrupt:
+; Note:
+; -----------------------------------------
+ZiFi.Connect:   LD BC, ZiFi.Callback
+                LD (Net.ZiFi.Handler), BC
+                
+                ; command "connect to access point"
+                XOR A
+                LD (ZiWi.CWJAP.ErrorCode), A
+                LD A, ZIFI_CWJAP
+                LD (ZiFi.CMD), A
+                LD A, OLD_SDK
+                JP Net.ZiFi.Cmd.ConnectToAP
 ; -----------------------------------------
 ; In:
 ;   DE - pointer to string
@@ -74,6 +92,7 @@ ZiFi.Callback:  LD A, (ZiFi.CMD)
                 DW ZiWi.CWAUTOCONN
                 DW ZiWi.CIPMUX
                 DW ZiWi.CWLAP
+                DW ZiWi.CWJAP
 
 ZiFi.ATE        ; -----------------------------------------
                 CHECK_RESPONSE
@@ -148,6 +167,24 @@ ZiWi.CWLAP      ; -----------------------------------------
                 LD (ZiFi.CMD), A
                 JP ZiFi.Sutdown
 
+ZiWi.CWJAP      ; -----------------------------------------
+                LD HL, .MsgResponse
+                EX DE, HL
+                CALL String.Contains
+                LD A, (HL)
+                JR C, .NotErrorCode
+                SUB "0"
+                LD (.ErrorCode), A
+.NotErrorCode   CHECK_RESPONSE
+                RET Z                                                           ; wait response
+.ErrorCode      EQU $+1
+                LD A, #00
+                LD A, ZIFI_CONNECTED
+                LD (ZiFi.CMD), A
+                JP ZiFi.Sutdown
+.MsgResponse    BYTE "+CWJAP:\0"
+
 ZiFi.CMD:       DB ZIFI_UNKNOW
+ZiFi.Req_CMD:   DB ZIFI_UNKNOW
 
                 endif ; ~_MENU_OPTIONS_CONNECT_ZI_FI_

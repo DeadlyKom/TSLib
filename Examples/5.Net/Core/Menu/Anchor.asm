@@ -37,6 +37,23 @@ AdjustHeight:   LD HL, (ResolutionHeightPtr)
                 RET
 ; -----------------------------------------
 ; In:
+; Out:
+; Corrupt:
+; Note:
+; -----------------------------------------
+GetCharWidth:   EX AF, AF'
+                GetPage3
+                EX AF, AF'
+                SetPage3 10
+                LD H, #C0
+                LD L, A
+                LD A, (HL)
+                EX AF, AF'
+                SetPage3_A
+                EX AF, AF'
+                RET
+; -----------------------------------------
+; In:
 ;   A  - anchor
 ;   HL - offset x
 ;   DE - offset y

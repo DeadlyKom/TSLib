@@ -83,7 +83,8 @@ RefreshAP:      ; get length string
                 POP DE
                 LDIR
                 POP BC
-                LD (HL), #00                                                    ; null-terminate
+                XOR A
+                LD (DE), A                                                      ; null-terminate
                 ; -----------------------------------------
 
                 ; find ","
@@ -112,6 +113,8 @@ RefreshAP:      ; get length string
 .SearchLoop     EX AF, AF'
                 PUSH HL
                 LD DE, .Buffer + FAccessPoint.SSID
+                INC HL
+                INC HL
                 CALL String.Compare
                 POP HL
                 JR NC, .UpdateAP

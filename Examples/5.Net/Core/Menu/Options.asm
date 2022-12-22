@@ -79,7 +79,14 @@ Op.ArrowDOWN:   LD A, (Op.Counter)
 Op.Selected:    LD A, (Op.Counter)
                 CP #00                                                          ; resolution
                 JR Z, Op.Resolution
+                
                 ; connect
+                XOR A
+                LD HL, Con.Counter
+                LD (HL), A
+                INC HL
+                LD (HL), A
+
                 LD A, MENU_CONNECT
                 LD (Flags.Menu), A
                 JP ZiFi.Init

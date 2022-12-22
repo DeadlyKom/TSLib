@@ -46,7 +46,7 @@ SendATCommand:  LD BC, ZOFR
                 CLEAR_RESPONSE
                 RET
 
-WaitResponce:   WAIT_RESPONSE
+WaitResponse:   WAIT_RESPONSE
                 RET
 
                 endif ; ~_NET_ZIFI_FIFO_
