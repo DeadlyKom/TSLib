@@ -5,10 +5,11 @@
 @REM set Project=2.HelloWorld
 @REM set Project=3.Bitmap
 @REM set Project=4.Noise
-set Project=5.Net
+@REM set Project=5.Net
+@REM set Project=6.RPG
 @REM set Project=Demo
 @REM set Project=Game
-@REM set Project=Prototype
+set Project=Prototype
 
 Build\_sjasmplus\sjasmplus.exe --fullpath --lstlab --sym=Build\Tmp\%Project%.labels --lst=Build\Tmp\%Project%.list --sld=Build\Tmp\%Project%.sld Examples\%Project%\Configuration.inc
 
